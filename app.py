@@ -21,7 +21,7 @@ st.set_page_config(
     page_title='Inventariere', 
     layout='wide',
 )
-st.title('Creează actele pentru inventariere:')
+st.title('Geneerază actele pentru inventariere:')
 
 ##--- HIDE STREAMLIT STYLE ---
 #hide_st_style = """
@@ -34,10 +34,10 @@ st.title('Creează actele pentru inventariere:')
 #st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
-"""
-Creates a dictionary of all variables needed for document templates.
-Returns: Dictionary mapping template variables to their values
-"""
+
+# Creates a dictionary of all variables needed for document templates.
+# Returns: Dictionary mapping template variables to their values
+
 # This extensive dictionary maps all template variables to their corresponding values
 # Used by DocxTemplate for document generation
 def var_dictionary ():
@@ -45,14 +45,15 @@ def var_dictionary ():
         'companie' : companie,
         'cui' : cui,
         'nr_inreg' : nr_inreg,
-        'loc_sed' : loc_sed,
-        'str_sed' : str_sed,
-        'nr_sed' : nr_sed,
-        'bl_sed' : bl_sed,
-        'sc_sed' : sc_sed,
-        'et_sed' : et_sed,
-        'ap_sed' : ap_sed,
-        'cam_sed' : cam_sed,
+        'adr_sed' : adr_sed,
+        #'loc_sed' : loc_sed,
+        #'str_sed' : str_sed,
+        #'nr_sed' : nr_sed,
+        #'bl_sed' : bl_sed,
+        #'sc_sed' : sc_sed,
+        #'et_sed' : et_sed,
+        #'ap_sed' : ap_sed,
+        #'cam_sed' : cam_sed,
         'jud_sed' : jud_sed,
         'nr_decz' : nr_decz,
         'data_decz' : data_decz,
@@ -199,14 +200,15 @@ class Company(Base):
     nr_inreg = Column(String, nullable=True)
 
     # Address fields
-    loc_sed = Column(String, nullable=True)
-    str_sed = Column(String, nullable=True)
-    nr_sed = Column(String, nullable=True)
-    bl_sed = Column(String, nullable=True)
-    sc_sed = Column(String, nullable=True)
-    et_sed = Column(String, nullable=True)
-    ap_sed = Column(String, nullable=True)
-    cam_sed = Column(String, nullable=True)
+    adr_sed = Column(String, nullable=True)
+    #loc_sed = Column(String, nullable=True)
+    #str_sed = Column(String, nullable=True)
+    #nr_sed = Column(String, nullable=True)
+    #bl_sed = Column(String, nullable=True)
+    #sc_sed = Column(String, nullable=True)
+    #et_sed = Column(String, nullable=True)
+    #ap_sed = Column(String, nullable=True)
+    #cam_sed = Column(String, nullable=True)
     jud_sed = Column(String, nullable=True)
 
     # Administrative contact
@@ -279,14 +281,15 @@ def company_selection_change():
                 'cui': company.cui or '',
                 'companie': company.companie or '',
                 'nr_inreg': company.nr_inreg or '',
-                'loc_sed': company.loc_sed or '',
-                'str_sed': company.str_sed or '',
-                'nr_sed': company.nr_sed or '',
-                'bl_sed': company.bl_sed or '',
-                'sc_sed': company.sc_sed or '',
-                'et_sed': company.et_sed or '',
-                'ap_sed': company.ap_sed or '',
-                'cam_sed': company.cam_sed or '',
+                'adr_sed': company.adr_sed or '',
+                #'loc_sed': company.loc_sed or '',
+                #'str_sed': company.str_sed or '',
+                #'nr_sed': company.nr_sed or '',
+                #'bl_sed': company.bl_sed or '',
+                #'sc_sed': company.sc_sed or '',
+                #'et_sed': company.et_sed or '',
+                #'ap_sed': company.ap_sed or '',
+                #'cam_sed': company.cam_sed or '',
                 'jud_sed': company.jud_sed or '',
                 'administrator': company.administrator or ''
             })
@@ -421,20 +424,25 @@ with st.form("inventar", clear_on_submit=False):
         companie = col1.text_input('Companie', value="", key='companie', placeholder='e.g. ADAKRON', max_chars=None, help='nu adaugati "SRL"')
         cui = col2.text_input('CUI', value="", key='cui', placeholder='e.g. 112233', max_chars=None)
         nr_inreg = col3.text_input('Nr. înregistrare', value="", key='nr_inreg', placeholder='JX/XXXX/XX.XX.XXXX', max_chars=None  )
+        col1, col2, col3 = st.columns(3, gap="small")
+        adr_sed = col1.text_input('Adresa Sediu', value="", key='adr_sed', placeholder='e.g. Oraș Brașov, Bd-ul Muncii, nr. 11, bl. A, sc. 1, et. 1, ap. 13, Birou 10', max_chars=None, help='nu adaugati "SRL"')
+        jud_sed = col2.text_input('Județ', key='jud_sed', placeholder='e.g. BRAȘOV')
+        col1, col2, col3 = st.columns(3, gap="small")
+        administrator = col1.text_input('Administrator', key='administrator', placeholder='e.g. POPESCU ANDREI')
 
-        col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([0.25, 0.25, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08], gap="small")
-        loc_sed = col1.text_input('Localitate sediu', key='loc_sed', placeholder='e.g. BRAȘOV')
-        str_sed = col2.text_input('Strada', key='str_sed', placeholder='e.g. NICOLAE LABIȘ')
-        nr_sed = col3.text_input('Nr.', key='nr_sed', placeholder='xx')
-        bl_sed = col4.text_input('Bl.', key='bl_sed', placeholder='xx')
-        sc_sed = col5.text_input('Sc.', key='sc_sed', placeholder='xx')
-        et_sed = col6.text_input('Et.', key='et_sed', placeholder='xx')
-        ap_sed = col7.text_input('Ap.', key='ap_sed', placeholder='xx')
-        cam_sed = col8.text_input('Camera/birou', key='cam_sed', placeholder='xx')
+        #col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([0.25, 0.25, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08], gap="small")
+        #loc_sed = col1.text_input('Localitate sediu', key='loc_sed', placeholder='e.g. BRAȘOV')
+        #str_sed = col2.text_input('Strada', key='str_sed', placeholder='e.g. NICOLAE LABIȘ')
+        #nr_sed = col3.text_input('Nr.', key='nr_sed', placeholder='xx')
+        #bl_sed = col4.text_input('Bl.', key='bl_sed', placeholder='xx')
+        #sc_sed = col5.text_input('Sc.', key='sc_sed', placeholder='xx')
+        #et_sed = col6.text_input('Et.', key='et_sed', placeholder='xx')
+        #ap_sed = col7.text_input('Ap.', key='ap_sed', placeholder='xx')
+        #cam_sed = col8.text_input('Camera/birou', key='cam_sed', placeholder='xx')
 
-        col1, col2, col3, col4 = st.columns(4, gap="small")
-        jud_sed = col1.text_input('Județ', key='jud_sed', placeholder='e.g. BRAȘOV')
-        administrator = col2.text_input('Administrator', key='administrator', placeholder='e.g. POPESCU ANDREI')
+        #col1, col2, col3, col4 = st.columns(4, gap="small")
+        #jud_sed = col1.text_input('Județ', key='jud_sed', placeholder='e.g. BRAȘOV')
+        #administrator = col2.text_input('Administrator', key='administrator', placeholder='e.g. POPESCU ANDREI')
 
         st.divider()
 
@@ -567,7 +575,10 @@ with st.form("inventar", clear_on_submit=False):
         st.write('Proces verbal privind rezultatele inventarierii:')
         col1, col2, col3, col4, col5 = st.columns([0.125, 0.125, 0.375, 0.125, 0.25], gap="small")
         cont1_ap = col2.text_input('Cont', key='cont1_ap', placeholder='1038', label_visibility="collapsed")
-        den_cont1_ap = col3.text_input('Denumire cont', key='den_cont1_ap', placeholder='Diferente din modificarea valorii juste a activelor financiare disponibile in vederea vanzarii si alte elemente de capitaluri proprii (A/P)', label_visibility="collapsed")
+        den_cont1_ap = col3.text_input('Denumire cont', key='den_cont1_ap', 
+                                    placeholder='Diferente din modificarea valorii juste a activelor financiare disponibile in vederea vanzarii si alte elemente de capitaluri proprii (A/P)',
+                                    label_visibility="collapsed"
+                                    )
         val1_ap = col4.text_input('Valoare', key='val1_ap', placeholder='Valoare', label_visibility="collapsed")
         cont2_ap = col2.text_input('Cont', key='cont2_ap', placeholder='....', label_visibility="collapsed")
         den_cont2_ap = col3.text_input('Denumire cont', key='den_cont2_ap', placeholder='.....', label_visibility="collapsed")
@@ -601,11 +612,11 @@ with st.form("inventar", clear_on_submit=False):
 
         st.write(' ')
         # Form submission handling
-        submitted = st.form_submit_button("Pas 1: Crează documentele", type="primary")
+        submitted = st.form_submit_button("Step 1: Save data and generate documents", type="primary")
 
 # Handle form submission
 if submitted:
-    with st.spinner("Se generează documentele..."):
+    with st.spinner("Generating documents..."):
 
         # Calculate totals and format currency
         totlei500 = 500 * lei500
@@ -629,14 +640,15 @@ if submitted:
             'cui': cui,
             'companie': companie,
             'nr_inreg': nr_inreg,
-            'loc_sed': loc_sed,
-            'str_sed': str_sed,
-            'nr_sed': nr_sed,
-            'bl_sed': bl_sed,
-            'sc_sed': sc_sed,
-            'et_sed': et_sed,
-            'ap_sed': ap_sed,
-            'cam_sed': cam_sed,
+            'adr_sed': adr_sed,
+            #'loc_sed': loc_sed,
+            #'str_sed': str_sed,
+            #'nr_sed': nr_sed,
+            #'bl_sed': bl_sed,
+            #'sc_sed': sc_sed,
+            #'et_sed': et_sed,
+            #'ap_sed': ap_sed,
+            #'cam_sed': cam_sed,
             'jud_sed': jud_sed,
             'administrator': administrator
         }
@@ -648,8 +660,8 @@ if submitted:
         zip_archive = create_zip_archive()
 
     # Show success message and download button
-    st.success("Succes! Documentele pot fi descărcate acum de mai jos!")
-    st.download_button(label="Pas 2: Downloadează", 
+    st.success("Succes! The documents have been generated.")
+    st.download_button(label="Step 2: Download", 
                     data=zip_archive, file_name=f"{companie}-acte-inventariere-{datetime.date.today()}.zip",
                     mime="docx", type="primary"
                     )
