@@ -13,8 +13,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import threading
 
+# Set Romanian locale for formatting
 locale.setlocale(locale.LC_ALL, 'ro_RO')
 
+# Configure Streamlit page settings
 st.set_page_config(
     page_title='Inventariere', 
     layout='wide',
@@ -32,6 +34,12 @@ st.title('Creează actele pentru inventariere:')
 #st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
+"""
+Creates a dictionary of all variables needed for document templates.
+Returns: Dictionary mapping template variables to their values
+"""
+# This extensive dictionary maps all template variables to their corresponding values
+# Used by DocxTemplate for document generation
 def var_dictionary ():
     var_dict = {
         'companie' : companie,
@@ -171,7 +179,7 @@ def var_dictionary ():
     }
     return var_dict
 
-# Database setup
+# Database Configuration
 DB_PATH = 'company_data.db'
 Base = declarative_base()
 
@@ -183,9 +191,14 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 class Company(Base):
     __tablename__ = 'companies'
+    # Primary key is the company's unique tax ID (CUI)
     cui = Column(String, primary_key=True, unique=True, index=True)
+
+    # Company details
     companie = Column(String, nullable=True)
     nr_inreg = Column(String, nullable=True)
+
+    # Address fields
     loc_sed = Column(String, nullable=True)
     str_sed = Column(String, nullable=True)
     nr_sed = Column(String, nullable=True)
@@ -195,8 +208,11 @@ class Company(Base):
     ap_sed = Column(String, nullable=True)
     cam_sed = Column(String, nullable=True)
     jud_sed = Column(String, nullable=True)
+
+    # Administrative contact
     administrator = Column(String, nullable=True)
 
+# Create database tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
 # Function to load data based on company name
@@ -211,20 +227,34 @@ def load_company_data_by_name(company_name):
 
 # Function to get all companies
 def get_all_companies():
+    """
+    Retrieves a list of all company names from the database.
+    Returns: List of company names (strings)
+    """
     session = SessionLocal()
-    companies = session.query(Company.companie, Company.cui).all()
+    companies = session.query(Company.companie).all()
     session.close()
-    return companies
+    # Extract company names from Row objects
+    return [company[0] for company in companies]
 
 # Function to save or update company data
 def save_or_update_company(data):
+    """
+    Saves new company data or updates existing company records in the database.
+    
+    Args: 
+        data (dict): Dictionary containing company information
+    """
     session = SessionLocal()
     company = session.query(Company).filter(Company.cui == data['cui']).first()
+
     if company:
+        # Update existing company record
         for key, value in data.items():
             setattr(company, key, value if value else None)
         print(f"Data updated for CUI: {data['cui']}")
     else:
+        # Create new company record
         new_company = Company(**{k: v or 'Unknown' for k, v in data.items()})
         session.add(new_company)
         print(f"New data saved for CUI: {data['cui']}")
@@ -233,10 +263,18 @@ def save_or_update_company(data):
 
 # Auto-populate fields when CUI changes
 def company_selection_change():
+    """
+    Callback function triggered when a company is selected from the dropdown.
+    Updates all form fields with the selected company's data.
+    """
     selected_company = st.session_state.get('selected_company', '')
     if selected_company:
-        company = load_company_data_by_name(selected_company)
+        session = SessionLocal()
+        company = session.query(Company).filter(Company.companie == selected_company).first()
+        session.close()
+        
         if company:
+            # Update session state with company details
             st.session_state.update({
                 'cui': company.cui or '',
                 'companie': company.companie or '',
@@ -253,7 +291,7 @@ def company_selection_change():
                 'administrator': company.administrator or ''
             })
 
-
+# Document Generation Functions
 def doc01():
     doc01_path = Path.cwd() / "Templates" / "Decizie-de-inventariere-v2.0.docx"
     doc01_doc = DocxTemplate(doc01_path)
@@ -336,6 +374,10 @@ def doc09():
     return doc09_bytes.getvalue()
 
 def create_zip_archive():
+    """
+    Creates a ZIP archive containing all generated documents.
+    Returns: Bytes object containing the ZIP archive
+    """
     # Generate the content for each document
     doc01_content = doc01()
     doc02_content = doc02()
@@ -346,7 +388,7 @@ def create_zip_archive():
     doc07_content = doc07()
     doc08_content = doc08()
     doc09_content = doc09()
-    # Create an in-memory zip file
+    # Create ZIP archive in memory
     with io.BytesIO() as zip_buffer:
         with ZipFile(zip_buffer, 'w') as zipf:
             # Add each doc to the archive
@@ -364,10 +406,13 @@ def create_zip_archive():
     return zip_bytes
 
 
-# Dropdown to select company
+# UI Components
+# Create company selection dropdown
 company_names = get_all_companies()
 col1, col2, col3 = st.columns(3, gap="small")
-selected_company = col2.selectbox('Selectează Compania', [''] + company_names, key='selected_company', on_change=company_selection_change)
+selected_company = col2.selectbox('Selectează Compania', [''] + company_names, 
+                                key='selected_company',
+                                on_change=company_selection_change)
 
 
 with st.form("inventar", clear_on_submit=False):
@@ -555,11 +600,14 @@ with st.form("inventar", clear_on_submit=False):
         st.divider()
 
         st.write(' ')
+        # Form submission handling
         submitted = st.form_submit_button("Pas 1: Crează documentele", type="primary")
 
+# Handle form submission
 if submitted:
     with st.spinner("Se generează documentele..."):
 
+        # Calculate totals and format currency
         totlei500 = 500 * lei500
         totlei200 = 200 * lei200
         totlei100 = 100 * lei100
@@ -576,6 +624,7 @@ if submitted:
         sold_casa_lei_tmp = totlei500 + totlei200 + totlei100 + totlei50 + totlei20 + totlei10 + totlei5 + totlei10 + totlei5 + totleu1 + totbani50 + totbani10 + totbani5 + totban1
         sold_casa_lei = locale._format("%.2f", sold_casa_lei_tmp, True)
 
+            # Create dictionary with company data for database storage
         data_to_save = {
             'cui': cui,
             'companie': companie,
@@ -592,9 +641,15 @@ if submitted:
             'administrator': administrator
         }
 
+        # Save company data in background thread
         threading.Thread(target=save_or_update_company, args=(data_to_save,)).start()
 
+        # Generate documents
         zip_archive = create_zip_archive()
 
+    # Show success message and download button
     st.success("Succes! Documentele pot fi descărcate acum de mai jos!")
-    st.download_button(label="Pas 2: Downloadează", data=zip_archive, file_name=f"{companie}-acte-inventariere-{datetime.date.today()}.zip", mime="docx", type="primary")
+    st.download_button(label="Pas 2: Downloadează", 
+                    data=zip_archive, file_name=f"{companie}-acte-inventariere-{datetime.date.today()}.zip",
+                    mime="docx", type="primary"
+                    )
