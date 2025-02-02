@@ -199,13 +199,13 @@ class Company(Base):
 
 Base.metadata.create_all(bind=engine)
 
-# Function to load data based on CUI
-def load_company_data(cui):
+# Function to load data based on company name
+def load_company_data_by_name(company_name):
     session = SessionLocal()
-    company = session.query(Company).filter(Company.cui == cui).first()
+    company = session.query(Company).filter(Company.companie == company_name).first()
     session.close()
     if company:
-        print(f"Data retrieved for CUI: {cui}")
+        print(f"Data retrieved for Company: {company_name}")
         return company
     return None
 
@@ -232,12 +232,13 @@ def save_or_update_company(data):
     session.close()
 
 # Auto-populate fields when CUI changes
-def cui_change():
-    cui_value = st.session_state.get('cui', '')
-    if cui_value:
-        company = load_company_data(cui_value)
+def company_selection_change():
+    selected_company = st.session_state.get('selected_company', '')
+    if selected_company:
+        company = load_company_data_by_name(selected_company)
         if company:
             st.session_state.update({
+                'cui': company.cui or '',
                 'companie': company.companie or '',
                 'nr_inreg': company.nr_inreg or '',
                 'loc_sed': company.loc_sed or '',
@@ -251,6 +252,7 @@ def cui_change():
                 'jud_sed': company.jud_sed or '',
                 'administrator': company.administrator or ''
             })
+
 
 def doc01():
     doc01_path = Path.cwd() / "Templates" / "Decizie-de-inventariere-v2.0.docx"
@@ -363,19 +365,9 @@ def create_zip_archive():
 
 
 # Dropdown to select company
-companies = get_all_companies()
-company_names = [companie for companie, _ in companies]
-
-col1, col2, col3, col4, col5, col6, col7 = st.columns([0.15, 0.15, 0.15, 0.1, 0.15, 0.15, 0.15], gap="small")
-selected_company = col1.selectbox('Selectează Compania', [''] + company_names)
-
-if selected_company:
-    selected_cui = next((cui for companie, cui in companies if companie == selected_company), '')
-    st.session_state.cui = selected_cui  # Update CUI based on selection
-    cui_change()  # Trigger data retrieval
-
-col1, col2, col3, col4, col5, col6, col7 = st.columns([0.15, 0.15, 0.15, 0.1, 0.15, 0.15, 0.15], gap="small")
-dropdown_cui = col1.text_input('CUI', value="", key='dropdown_cui', placeholder='e.g. 112233', max_chars=None, on_change=cui_change)
+company_names = get_all_companies()
+col1, col2, col3 = st.columns(3, gap="small")
+selected_company = col2.selectbox('Selectează Compania', [''] + company_names, key='selected_company', on_change=company_selection_change)
 
 
 with st.form("inventar", clear_on_submit=False):
