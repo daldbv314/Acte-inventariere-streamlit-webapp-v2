@@ -21,7 +21,7 @@ st.set_page_config(
     page_title='Inventariere', 
     layout='wide',
 )
-st.title('Geneerază actele pentru inventariere:')
+st.title('Generează actele pentru inventariere:')
 
 ##--- HIDE STREAMLIT STYLE ---
 #hide_st_style = """
