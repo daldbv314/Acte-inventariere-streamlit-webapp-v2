@@ -54,7 +54,7 @@ def reset_all_fields():
     # No explicit rerun call here; the state update will trigger a re-run
 
 col1, col2 = st.columns([7, 1])
-buton_sterg = col2.button("Reseteaza toate câmpurile ⚠️", 
+buton_sterg = col2.button("Resetează toate câmpurile ⚠️", 
                 type="secondary", 
                 help="Resetează toate câmpurile la valorile implicite")
 
