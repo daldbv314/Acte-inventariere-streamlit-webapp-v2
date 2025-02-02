@@ -35,6 +35,32 @@ st.title('Geneerază actele pentru inventariere:')
 
 
 
+DEFAULT_VALUES = {
+    "companie": "",
+    "cui": "",
+    "nr_inreg": "",
+    "adr_sed": "",
+    "jud_sed": "",
+    "administrator": "",
+    "nr_decz": "",
+    "data_decz": "",
+    "selected_company": "",
+    }
+
+def reset_all_fields():
+    # Reset individual fields to default values
+    for key, default in DEFAULT_VALUES.items():
+        st.session_state[key] = default
+    # No explicit rerun call here; the state update will trigger a re-run
+
+col1, col2 = st.columns([7, 1])
+buton_sterg = col2.button("Reseteaza toate câmpurile ⚠️", 
+                type="secondary", 
+                help="Resetează toate câmpurile la valorile implicite")
+
+if buton_sterg:
+    reset_all_fields()
+
 # Creates a dictionary of all variables needed for document templates.
 # Returns: Dictionary mapping template variables to their values
 
@@ -412,10 +438,14 @@ def create_zip_archive():
 # UI Components
 # Create company selection dropdown
 company_names = get_all_companies()
+for _ in range(4):  # Number of blank lines
+    st.write("")
 col1, col2, col3 = st.columns(3, gap="small")
 selected_company = col2.selectbox('Selectează Compania', [''] + company_names, 
                                 key='selected_company',
                                 on_change=company_selection_change)
+for _ in range(4):  # Number of blank lines
+    st.write("")
 
 
 with st.form("inventar", clear_on_submit=False):
