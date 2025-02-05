@@ -451,14 +451,17 @@ for _ in range(4):  # Number of blank lines
 with st.form("inventar", clear_on_submit=False):
         
         col1, col2, col3 = st.columns(3, gap="small")
-        companie = col1.text_input('Companie', value="", key='companie', placeholder='e.g. ADAKRON', max_chars=None, help='nu adaugati "SRL"')
+        companie = col1.text_input('Companie', value="", key='companie', placeholder='e.g. ADAKRON SRL', max_chars=None, help='')
         cui = col2.text_input('CUI', value="", key='cui', placeholder='e.g. 112233', max_chars=None)
         nr_inreg = col3.text_input('Nr. înregistrare', value="", key='nr_inreg', placeholder='JX/XXXX/XX.XX.XXXX', max_chars=None  )
         col1, col2, col3 = st.columns(3, gap="small")
-        adr_sed = col1.text_input('Adresa Sediu', value="", key='adr_sed', placeholder='e.g. Oraș Brașov, Bd-ul Muncii, nr. 11, bl. A, sc. 1, et. 1, ap. 13, Birou 10', max_chars=None, help='nu adaugati "SRL"')
+        adr_sed = col1.text_input('Adresa Sediu', value="", key='adr_sed',
+                                placeholder='e.g. Oraș Brașov, Bd-ul Muncii, nr. 11, bl. A, sc. 1, et. 1, ap. 13, Birou 10',
+                                max_chars=None, help='')
         jud_sed = col2.text_input('Județ', key='jud_sed', placeholder='e.g. BRAȘOV')
         col1, col2, col3 = st.columns(3, gap="small")
         administrator = col1.text_input('Administrator', key='administrator', placeholder='e.g. POPESCU ANDREI')
+        membru_com = col2.text_input('Membru Comisie', key='membru_com', placeholder='e.g. POPESCU ȘTEFAN')
 
         #col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([0.25, 0.25, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08], gap="small")
         #loc_sed = col1.text_input('Localitate sediu', key='loc_sed', placeholder='e.g. BRAȘOV')
