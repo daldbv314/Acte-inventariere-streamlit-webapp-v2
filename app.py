@@ -49,7 +49,6 @@ DEFAULT_VALUES = {
     "data_inv": "",
     "data_predare_pv": "",
     "an_inv": "",
-    "tip_inv": "",
     "tip_doc_in_gest": "",
     "nr_doc_in_gest": "",
     "data_doc_in_gest": "",
@@ -133,36 +132,38 @@ DEFAULT_VALUES = {
     "cont_banca3usd": "",
     "sold_banca3usd": "",
 
-    "cont1_ap": "",
-    "den_cont1_ap": "",
-    "val1_ap": "",
-    "cont2_ap": "",
-    "den_cont2_ap": "",
-    "val2_ap": "",
-    "cont3_ap": "",
-    "den_cont3_ap": "",
-    "val3_ap": "",
-    "cont4_ap": "",
-    "den_cont4_ap": "",
-    "val4_ap": "",
-    "cont5_ap": "",
-    "den_cont5_ap": "",
-    "val5_ap": "",
-    "cont6_ap": "",
-    "den_cont6_ap": "",
-    "val6_ap": "",
-    "cont7_ap": "",
-    "den_cont7_ap": "",
-    "val7_ap": "",
-    "cont8_ap": "",
-    "den_cont8_ap": "",
-    "val8_ap": "",
-    "cont9_ap": "",
-    "den_cont9_ap": "",
-    "val9_ap": "",
-    "cont10_ap": "",
-    "den_cont10_ap": "",
-    "val10_ap": "",
+    # "cont1_ap": "",
+    # "den_cont1_ap": "",
+    # "val1_ap": "",
+    # "cont2_ap": "",
+    # "den_cont2_ap": "",
+    # "val2_ap": "",
+    # "cont3_ap": "",
+    # "den_cont3_ap": "",
+    # "val3_ap": "",
+    # "cont4_ap": "",
+    # "den_cont4_ap": "",
+    # "val4_ap": "",
+    # "cont5_ap": "",
+    # "den_cont5_ap": "",
+    # "val5_ap": "",
+    # "cont6_ap": "",
+    # "den_cont6_ap": "",
+    # "val6_ap": "",
+    # "cont7_ap": "",
+    # "den_cont7_ap": "",
+    # "val7_ap": "",
+    # "cont8_ap": "",
+    # "den_cont8_ap": "",
+    # "val8_ap": "",
+    # "cont9_ap": "",
+    # "den_cont9_ap": "",
+    # "val9_ap": "",
+    # "cont10_ap": "",
+    # "den_cont10_ap": "",
+    # "val10_ap": "",
+    "propuneri_pvi": "",
+    
 }
 
 def reset_all_fields():
@@ -206,7 +207,6 @@ def var_dictionary ():
         'data_inv' : data_inv,
         'data_predare_pv' : data_predare_pv,
         'an_inv' : an_inv,
-        'tip_inv' : tip_inv,
         'tip_doc_in_gest' : tip_doc_in_gest,
         'nr_doc_in_gest' : nr_doc_in_gest,
         'data_doc_in_gest' : data_doc_in_gest,
@@ -290,37 +290,37 @@ def var_dictionary ():
         'cont_banca3usd' : cont_banca3usd,
         'sold_banca3usd' : sold_banca3usd,
 
-        'cont1_ap' : cont1_ap,
-        'den_cont1_ap' : den_cont1_ap,
-        'val1_ap' : val1_ap,
-        'cont2_ap' : cont2_ap,
-        'den_cont2_ap' : den_cont2_ap,
-        'val2_ap' : val2_ap,
-        'cont3_ap' : cont3_ap,
-        'den_cont3_ap' : den_cont3_ap,
-        'val3_ap' : val3_ap,
-        'cont4_ap' : cont4_ap,
-        'den_cont4_ap' : den_cont4_ap,
-        'val4_ap' : val4_ap,
-        'cont5_ap' : cont5_ap,
-        'den_cont5_ap' : den_cont5_ap,
-        'val5_ap' : val5_ap,
-        'cont6_ap' : cont6_ap,
-        'den_cont6_ap' : den_cont6_ap,
-        'val6_ap' : val6_ap,
-        'cont7_ap' : cont7_ap,
-        'den_cont7_ap' : den_cont7_ap,
-        'val7_ap' : val7_ap,
-        'cont8_ap' : cont8_ap,
-        'den_cont8_ap' : den_cont8_ap,
-        'val8_ap' : val8_ap,
-        'cont9_ap' : cont9_ap,
-        'den_cont9_ap' : den_cont9_ap,
-        'val9_ap' : val9_ap,
-        'cont10_ap' : cont10_ap,
-        'den_cont10_ap' : den_cont10_ap,
-        'val10_ap' : val10_ap,
-
+        # 'cont1_ap' : cont1_ap,
+        # 'den_cont1_ap' : den_cont1_ap,
+        # 'val1_ap' : val1_ap,
+        # 'cont2_ap' : cont2_ap,
+        # 'den_cont2_ap' : den_cont2_ap,
+        # 'val2_ap' : val2_ap,
+        # 'cont3_ap' : cont3_ap,
+        # 'den_cont3_ap' : den_cont3_ap,
+        # 'val3_ap' : val3_ap,
+        # 'cont4_ap' : cont4_ap,
+        # 'den_cont4_ap' : den_cont4_ap,
+        # 'val4_ap' : val4_ap,
+        # 'cont5_ap' : cont5_ap,
+        # 'den_cont5_ap' : den_cont5_ap,
+        # 'val5_ap' : val5_ap,
+        # 'cont6_ap' : cont6_ap,
+        # 'den_cont6_ap' : den_cont6_ap,
+        # 'val6_ap' : val6_ap,
+        # 'cont7_ap' : cont7_ap,
+        # 'den_cont7_ap' : den_cont7_ap,
+        # 'val7_ap' : val7_ap,
+        # 'cont8_ap' : cont8_ap,
+        # 'den_cont8_ap' : den_cont8_ap,
+        # 'val8_ap' : val8_ap,
+        # 'cont9_ap' : cont9_ap,
+        # 'den_cont9_ap' : den_cont9_ap,
+        # 'val9_ap' : val9_ap,
+        # 'cont10_ap' : cont10_ap,
+        # 'den_cont10_ap' : den_cont10_ap,
+        # 'val10_ap' : val10_ap,
+        'propuneri_pvi' : propuneri_pvi,
         
     }
     return var_dict
@@ -608,18 +608,18 @@ with st.form("inventar", clear_on_submit=False):
         an_inv = data_inv_tmp.year
         data_predare_pv_tmp = data_inv_tmp + datetime.timedelta(days=7)
         data_predare_pv = data_predare_pv_tmp.strftime("%d.%m.%Y")
-        tip_inv = col5.selectbox('Situatiile financiare', 
-                                    (f"anuale întocmite pentru anul {an_inv}", f"interimare întocmite pentru trimestrul I al anului {an_inv}", f"interimare întocmite pentru trimestrul II al anului {an_inv}", f"interimare întocmite pentru trimestrul III al anului {an_inv}"), 
-                                    key='tip_inv', index=0)
-#        st.write('Test:', data_predare_pv)
-#        st.write('Test:', an_inv)
-#        st.caption('This is a string that explains something above.')
-#        st.text('This is regular text')
-#        st.write('This is wtire')
-#        st.write('<u>Decizie inventariere:<u>',unsafe_allow_html=True)
-#        st.header('This is a header')
-#        st.subheader('This is a subheader')
-#        st.title('This is a title')
+        # tip_inv = col5.selectbox('Situatiile financiare', 
+        #                             (f"anuale întocmite pentru anul {an_inv}", f"interimare întocmite pentru trimestrul I al anului {an_inv}", f"interimare întocmite pentru trimestrul II al anului {an_inv}", f"interimare întocmite pentru trimestrul III al anului {an_inv}"), 
+        #                             key='tip_inv', index=0)
+        # st.write('Test:', data_predare_pv)
+        # st.write('Test:', an_inv)
+        # st.caption('This is a string that explains something above.')
+        # st.text('This is regular text')
+        # st.write('This is wtire')
+        # st.write('<u>Decizie inventariere:<u>',unsafe_allow_html=True)
+        # st.header('This is a header')
+        # st.subheader('This is a subheader')
+        # st.title('This is a title')
         
         st.divider()
 
@@ -725,40 +725,44 @@ with st.form("inventar", clear_on_submit=False):
         st.divider()
 
         st.write('Proces verbal privind rezultatele inventarierii:')
-        col1, col2, col3, col4, col5 = st.columns([0.125, 0.125, 0.375, 0.125, 0.25], gap="small")
-        cont1_ap = col2.text_input('Cont', key='cont1_ap', placeholder='1038', label_visibility="collapsed")
-        den_cont1_ap = col3.text_input('Denumire cont', key='den_cont1_ap', 
-                                    placeholder='Diferente din modificarea valorii juste a activelor financiare disponibile in vederea vanzarii si alte elemente de capitaluri proprii (A/P)',
-                                    label_visibility="collapsed"
-                                    )
-        val1_ap = col4.text_input('Valoare', key='val1_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont2_ap = col2.text_input('Cont', key='cont2_ap', placeholder='....', label_visibility="collapsed")
-        den_cont2_ap = col3.text_input('Denumire cont', key='den_cont2_ap', placeholder='.....', label_visibility="collapsed")
-        val2_ap = col4.text_input('Valoare', key='val2_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont3_ap = col2.text_input('Cont', key='cont3_ap', placeholder='....', label_visibility="collapsed")
-        den_cont3_ap = col3.text_input('Denumire cont', key='den_cont3_ap', placeholder='.....', label_visibility="collapsed")
-        val3_ap = col4.text_input('Valoare', key='val3_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont4_ap = col2.text_input('Cont', key='cont4_ap', placeholder='....', label_visibility="collapsed")
-        den_cont4_ap = col3.text_input('Denumire cont', key='den_cont4_ap', placeholder='.....', label_visibility="collapsed")
-        val4_ap = col4.text_input('Valoare', key='val4_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont5_ap = col2.text_input('Cont', key='cont5_ap', placeholder='....', label_visibility="collapsed")
-        den_cont5_ap = col3.text_input('Denumire cont', key='den_cont5_ap', placeholder='.....', label_visibility="collapsed")
-        val5_ap = col4.text_input('Valoare', key='val5_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont6_ap = col2.text_input('Cont', key='cont6_ap', placeholder='....', label_visibility="collapsed")
-        den_cont6_ap = col3.text_input('Denumire cont', key='den_cont6_ap', placeholder='.....', label_visibility="collapsed")
-        val6_ap = col4.text_input('Valoare', key='val6_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont7_ap = col2.text_input('Cont', key='cont7_ap', placeholder='....', label_visibility="collapsed")
-        den_cont7_ap = col3.text_input('Denumire cont', key='den_cont7_ap', placeholder='.....', label_visibility="collapsed")
-        val7_ap = col4.text_input('Valoare', key='val7_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont8_ap = col2.text_input('Cont', key='cont8_ap', placeholder='....', label_visibility="collapsed")
-        den_cont8_ap = col3.text_input('Denumire cont', key='den_cont8_ap', placeholder='.....', label_visibility="collapsed")
-        val8_ap = col4.text_input('Valoare', key='val8_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont9_ap = col2.text_input('Cont', key='cont9_ap', placeholder='....', label_visibility="collapsed")
-        den_cont9_ap = col3.text_input('Denumire cont', key='den_cont9_ap', placeholder='.....', label_visibility="collapsed")
-        val9_ap = col4.text_input('Valoare', key='val9_ap', placeholder='Valoare', label_visibility="collapsed")
-        cont10_ap = col2.text_input('Cont', key='cont10_ap', placeholder='....', label_visibility="collapsed")
-        den_cont10_ap = col3.text_input('Denumire cont', key='den_cont10_ap', placeholder='.....', label_visibility="collapsed")
-        val10_ap = col4.text_input('Valoare', key='val10_ap', placeholder='Valoare', label_visibility="collapsed")
+        #col1, col2, col3, col4, col5 = st.columns([0.125, 0.125, 0.375, 0.125, 0.25], gap="small")
+        # cont1_ap = col2.text_input('Cont', key='cont1_ap', placeholder='1038', label_visibility="collapsed")
+        # den_cont1_ap = col3.text_input('Denumire cont', key='den_cont1_ap', 
+        #                             placeholder='Diferente din modificarea valorii juste a activelor financiare disponibile in vederea vanzarii si alte elemente de capitaluri proprii (A/P)',
+        #                             label_visibility="collapsed"
+        #                             )
+        # val1_ap = col4.text_input('Valoare', key='val1_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont2_ap = col2.text_input('Cont', key='cont2_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont2_ap = col3.text_input('Denumire cont', key='den_cont2_ap', placeholder='.....', label_visibility="collapsed")
+        # val2_ap = col4.text_input('Valoare', key='val2_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont3_ap = col2.text_input('Cont', key='cont3_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont3_ap = col3.text_input('Denumire cont', key='den_cont3_ap', placeholder='.....', label_visibility="collapsed")
+        # val3_ap = col4.text_input('Valoare', key='val3_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont4_ap = col2.text_input('Cont', key='cont4_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont4_ap = col3.text_input('Denumire cont', key='den_cont4_ap', placeholder='.....', label_visibility="collapsed")
+        # val4_ap = col4.text_input('Valoare', key='val4_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont5_ap = col2.text_input('Cont', key='cont5_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont5_ap = col3.text_input('Denumire cont', key='den_cont5_ap', placeholder='.....', label_visibility="collapsed")
+        # val5_ap = col4.text_input('Valoare', key='val5_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont6_ap = col2.text_input('Cont', key='cont6_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont6_ap = col3.text_input('Denumire cont', key='den_cont6_ap', placeholder='.....', label_visibility="collapsed")
+        # val6_ap = col4.text_input('Valoare', key='val6_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont7_ap = col2.text_input('Cont', key='cont7_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont7_ap = col3.text_input('Denumire cont', key='den_cont7_ap', placeholder='.....', label_visibility="collapsed")
+        # val7_ap = col4.text_input('Valoare', key='val7_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont8_ap = col2.text_input('Cont', key='cont8_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont8_ap = col3.text_input('Denumire cont', key='den_cont8_ap', placeholder='.....', label_visibility="collapsed")
+        # val8_ap = col4.text_input('Valoare', key='val8_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont9_ap = col2.text_input('Cont', key='cont9_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont9_ap = col3.text_input('Denumire cont', key='den_cont9_ap', placeholder='.....', label_visibility="collapsed")
+        # val9_ap = col4.text_input('Valoare', key='val9_ap', placeholder='Valoare', label_visibility="collapsed")
+        # cont10_ap = col2.text_input('Cont', key='cont10_ap', placeholder='....', label_visibility="collapsed")
+        # den_cont10_ap = col3.text_input('Denumire cont', key='den_cont10_ap', placeholder='.....', label_visibility="collapsed")
+        # val10_ap = col4.text_input('Valoare', key='val10_ap', placeholder='Valoare', label_visibility="collapsed")
+        propuneri_pvi = st.text_area('Propuneri:', key=None,
+                                    help='În urma celor constatate, facem următoarele propuneri:',
+                                    placeholder='1. Lorem ipsum odor amet, consectetuer adipiscing elit.\n2. Risus himenaeos potenti mollis; augue facilisi suscipit cras.\n3. Facilisi, dictumst vivamus, semper nibh inceptos.',
+                                    disabled=False, label_visibility="visible")
 
         st.divider()
 
