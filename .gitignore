@@ -1,7 +1,7 @@
 # Ignore all .xlsx files
 *.xlsx
 
-# Ignore all .xlsx files
+# Ignore all .db files
 *.db
 
 # Ignore all .pdf files
