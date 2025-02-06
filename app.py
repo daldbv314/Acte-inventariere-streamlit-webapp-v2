@@ -611,6 +611,19 @@ with st.form("inventar", clear_on_submit=False):
         
         st.divider()
 
+        st.write('Declaratie casier:')
+        col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172, ], gap="small")
+        tip_doc_in_casier = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal", "Dispozițe de încasare"), key='tip_doc_in_casier', index=0, help=None)
+        nr_doc_in_casier = col2.text_input('Nr.', key='nr_doc_in_casier', placeholder='xx')
+        data_doc_in_casier_tmp = col3.date_input('Data document', datetime.date.today(), key='data_doc_in_casier_tmp', help=None, format="DD.MM.YYYY")
+        data_doc_in_casier = data_doc_in_casier_tmp.strftime("%d.%m.%Y")
+        tip_doc_out_casier = col6.selectbox('Tip document ieșire', ("Factura", "Bon fiscal", "Dispoziție de plată", "Chitanță"), key='tip_doc_out_casier', index=0, help=None)
+        nr_doc_out_casier = col7.text_input('Nr.', key='nr_doc_out_casier', placeholder='xx')
+        data_doc_out_casier_tmp = col8.date_input('Data document', datetime.date.today(), key='data_doc_out_casier_tmp', help=None, format="DD.MM.YYYY")
+        data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
+
+        st.divider()
+
         st.write('Declaratie gestionar:')
         col1, col2, col3, col4, col5, col6, col7 = st.columns([0.15, 0.15, 0.15, 0.1, 0.15, 0.15, 0.15], gap="small")
         tip_doc_in_gest = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal"), key='tip_doc_in_gest', index=0, help=None)
@@ -622,6 +635,24 @@ with st.form("inventar", clear_on_submit=False):
         data_doc_out_gest_tmp = col7.date_input('Data document', datetime.date.today(), key='data_doc_out_gest_tmp', help=None, format="DD.MM.YYYY")
         data_doc_out_gest = data_doc_out_gest_tmp.strftime("%d.%m.%Y")
         
+        st.divider()
+
+        st.write('Declarație responsabil conturi bancare:')
+        col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172, ], gap="small")
+        tip_doc_in_casier_cb = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal"), key='tip_doc_in_casier_cb', index=0, help=None)
+        nr_doc_in_casier_cb = col2.text_input('Nr.', key='nr_doc_in_casier_cb', placeholder='xx')
+        data_doc_in_casier_cb_tmp = col3.date_input('Data document', datetime.date.today(), key='data_doc_in_casier_cb_tmp', help=None, format="DD.MM.YYYY")
+        data_doc_in_casier_cb = data_doc_in_casier_cb_tmp.strftime("%d.%m.%Y")
+        data_incasare_doc_in_cb_tmp = col4.date_input('Data încasare', datetime.date.today(), key='data_incasare_doc_in_cb_tmp', help=None, format="DD.MM.YYYY")
+        data_incasare_doc_in_cb = data_incasare_doc_in_cb_tmp.strftime("%d.%m.%Y")
+        tip_doc_out_casier_cb = col6.selectbox('Tip document ieșire', ("Factura", "Bon fiscal"), key='tip_doc_out_casier_cb', index=0, help=None)
+        nr_doc_out_casier_cb = col7.text_input('Nr.', key='nr_doc_out_casier_cb', placeholder='xx')
+        data_doc_out_casier_cb_tmp = col8.date_input('Data document', datetime.date.today(), key='data_doc_out_casier_cb_tmp', help=None, format="DD.MM.YYYY")
+        data_doc_out_casier_cb = data_doc_out_casier_cb_tmp.strftime("%d.%m.%Y")
+        data_plata_doc_out_cb_tmp = col9.date_input('Data plata', datetime.date.today(), key='data_plata_doc_out_cb_tmp', help=None, format="DD.MM.YYYY")
+        data_plata_doc_out_cb = data_plata_doc_out_cb_tmp.strftime("%d.%m.%Y")
+        furnizor_plata_out_cb = col10.text_input('Furnizor', key='furnizor_plata_out_cb', placeholder='S.C. ADAKRON S.R.L.')
+
         st.divider()
 
         st.write('Proces verbal de inventariere numerar si conturi bancare:')
@@ -681,36 +712,10 @@ with st.form("inventar", clear_on_submit=False):
 
         st.divider()
 
-        st.write('Declaratie casier:')
-        col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172, ], gap="small")
-        tip_doc_in_casier = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal", "Dispozițe de încasare"), key='tip_doc_in_casier', index=0, help=None)
-        nr_doc_in_casier = col2.text_input('Nr.', key='nr_doc_in_casier', placeholder='xx')
-        data_doc_in_casier_tmp = col3.date_input('Data document', datetime.date.today(), key='data_doc_in_casier_tmp', help=None, format="DD.MM.YYYY")
-        data_doc_in_casier = data_doc_in_casier_tmp.strftime("%d.%m.%Y")
-        tip_doc_out_casier = col6.selectbox('Tip document ieșire', ("Factura", "Bon fiscal", "Dispoziție de plată", "Chitanță"), key='tip_doc_out_casier', index=0, help=None)
-        nr_doc_out_casier = col7.text_input('Nr.', key='nr_doc_out_casier', placeholder='xx')
-        data_doc_out_casier_tmp = col8.date_input('Data document', datetime.date.today(), key='data_doc_out_casier_tmp', help=None, format="DD.MM.YYYY")
-        data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
-
-        st.divider()
-
-        st.write('Declarație responsabil conturi bancare:')
-        col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172, ], gap="small")
-        tip_doc_in_casier_cb = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal"), key='tip_doc_in_casier_cb', index=0, help=None)
-        nr_doc_in_casier_cb = col2.text_input('Nr.', key='nr_doc_in_casier_cb', placeholder='xx')
-        data_doc_in_casier_cb_tmp = col3.date_input('Data document', datetime.date.today(), key='data_doc_in_casier_cb_tmp', help=None, format="DD.MM.YYYY")
-        data_doc_in_casier_cb = data_doc_in_casier_cb_tmp.strftime("%d.%m.%Y")
-        data_incasare_doc_in_cb_tmp = col4.date_input('Data încasare', datetime.date.today(), key='data_incasare_doc_in_cb_tmp', help=None, format="DD.MM.YYYY")
-        data_incasare_doc_in_cb = data_incasare_doc_in_cb_tmp.strftime("%d.%m.%Y")
-        tip_doc_out_casier_cb = col6.selectbox('Tip document ieșire', ("Factura", "Bon fiscal"), key='tip_doc_out_casier_cb', index=0, help=None)
-        nr_doc_out_casier_cb = col7.text_input('Nr.', key='nr_doc_out_casier_cb', placeholder='xx')
-        data_doc_out_casier_cb_tmp = col8.date_input('Data document', datetime.date.today(), key='data_doc_out_casier_cb_tmp', help=None, format="DD.MM.YYYY")
-        data_doc_out_casier_cb = data_doc_out_casier_cb_tmp.strftime("%d.%m.%Y")
-        data_plata_doc_out_cb_tmp = col9.date_input('Data plata', datetime.date.today(), key='data_plata_doc_out_cb_tmp', help=None, format="DD.MM.YYYY")
-        data_plata_doc_out_cb = data_plata_doc_out_cb_tmp.strftime("%d.%m.%Y")
-        furnizor_plata_out_cb = col10.text_input('Furnizor', key='furnizor_plata_out_cb', placeholder='S.C. ADAKRON S.R.L.')
-
-        st.divider()
+        st.markdown(
+                    """<hr style="border:2px solid grey;">""", 
+                    unsafe_allow_html=True
+                    )
 
         st.write('Proces verbal privind rezultatele inventarierii:')
         #col1, col2, col3, col4, col5 = st.columns([0.125, 0.125, 0.375, 0.125, 0.25], gap="small")
