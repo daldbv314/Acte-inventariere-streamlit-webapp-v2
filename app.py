@@ -42,6 +42,8 @@ DEFAULT_VALUES = {
     "nr_inreg": "",
     "adr_sed": "",
     "jud_sed": "",
+    "adr_pl1": "",
+    "jud_pl1": "",
     "administrator": "",
     "nr_decz": "",
     "data_decz": "",
@@ -191,15 +193,9 @@ def var_dictionary ():
         'cui' : cui,
         'nr_inreg' : nr_inreg,
         'adr_sed' : adr_sed,
-        #'loc_sed' : loc_sed,
-        #'str_sed' : str_sed,
-        #'nr_sed' : nr_sed,
-        #'bl_sed' : bl_sed,
-        #'sc_sed' : sc_sed,
-        #'et_sed' : et_sed,
-        #'ap_sed' : ap_sed,
-        #'cam_sed' : cam_sed,
         'jud_sed' : jud_sed,
+        'adr_pl1' : adr_pl1,
+        'jud_pl1' : jud_pl1,
         'nr_decz' : nr_decz,
         'data_decz' : data_decz,
         'administrator' : administrator,
@@ -346,15 +342,9 @@ class Company(Base):
 
     # Address fields
     adr_sed = Column(String, nullable=True)
-    #loc_sed = Column(String, nullable=True)
-    #str_sed = Column(String, nullable=True)
-    #nr_sed = Column(String, nullable=True)
-    #bl_sed = Column(String, nullable=True)
-    #sc_sed = Column(String, nullable=True)
-    #et_sed = Column(String, nullable=True)
-    #ap_sed = Column(String, nullable=True)
-    #cam_sed = Column(String, nullable=True)
     jud_sed = Column(String, nullable=True)
+    adr_pl1 = Column(String, nullable=True)
+    jud_pl1 = Column(String, nullable=True)
 
     # Administrative contact
     administrator = Column(String, nullable=True)
@@ -427,21 +417,15 @@ def company_selection_change():
                 'companie': company.companie or '',
                 'nr_inreg': company.nr_inreg or '',
                 'adr_sed': company.adr_sed or '',
-                #'loc_sed': company.loc_sed or '',
-                #'str_sed': company.str_sed or '',
-                #'nr_sed': company.nr_sed or '',
-                #'bl_sed': company.bl_sed or '',
-                #'sc_sed': company.sc_sed or '',
-                #'et_sed': company.et_sed or '',
-                #'ap_sed': company.ap_sed or '',
-                #'cam_sed': company.cam_sed or '',
                 'jud_sed': company.jud_sed or '',
+                'adr_pl1': company.adr_pl1 or '',
+                'jud_pl1': company.jud_pl1 or '',
                 'administrator': company.administrator or ''
             })
 
 # Document Generation Functions
 def doc01():
-    doc01_path = Path.cwd() / "Templates" / "Decizie-de-inventariere-v2.0.docx"
+    doc01_path = Path.cwd() / "Templates" / "01.Decizie-de-inventariere-v2.0.docx"
     doc01_doc = DocxTemplate(doc01_path)
     context = var_dictionary()
     doc01_doc.render(context)
@@ -450,7 +434,7 @@ def doc01():
     return doc01_bytes.getvalue()
 
 def doc02():
-    doc02_path = Path.cwd() / "Templates" / "Grafic-de-desfasurare-inventariere-v1.1.docx"
+    doc02_path = Path.cwd() / "Templates" / "02.Grafic-de-desfasurare-inventariere-v1.1.docx"
     doc02_doc = DocxTemplate(doc02_path)
     context = var_dictionary()
     doc02_doc.render(context)
@@ -459,7 +443,7 @@ def doc02():
     return doc02_bytes.getvalue()
 
 def doc03():
-    doc03_path = Path.cwd() / "Templates" / "Proceduri-privind-inventarierea-v1.1.docx"
+    doc03_path = Path.cwd() / "Templates" / "03.Proceduri-privind-inventarierea-v1.1.docx"
     doc03_doc = DocxTemplate(doc03_path)
     context = var_dictionary()
     doc03_doc.render(context)
@@ -468,7 +452,7 @@ def doc03():
     return doc03_bytes.getvalue()
 
 def doc04():
-    doc04_path = Path.cwd() / "Templates" / "Declaratie-gestionar-inainte-inv-v1.1.docx"
+    doc04_path = Path.cwd() / "Templates" / "04.Declaratie-casier-v1.1.docx"
     doc04_doc = DocxTemplate(doc04_path)
     context = var_dictionary()
     doc04_doc.render(context)
@@ -477,7 +461,7 @@ def doc04():
     return doc04_bytes.getvalue()
 
 def doc05():
-    doc05_path = Path.cwd() / "Templates" / "PV-inventariere-numerar-si-conturi-banci-v1.1.docx"
+    doc05_path = Path.cwd() / "Templates" / "05.Declaratie-gestionar-inainte-inv-v1.1.docx"
     doc05_doc = DocxTemplate(doc05_path)
     context = var_dictionary()
     doc05_doc.render(context)
@@ -486,7 +470,7 @@ def doc05():
     return doc05_bytes.getvalue()
 
 def doc06():
-    doc06_path = Path.cwd() / "Templates" / "Declaratie-casier-v1.1.docx"
+    doc06_path = Path.cwd() / "Templates" / "06.Declaratie-gestionar-sfarsit-inv-v1.1.docx"
     doc06_doc = DocxTemplate(doc06_path)
     context = var_dictionary()
     doc06_doc.render(context)
@@ -495,7 +479,7 @@ def doc06():
     return doc06_bytes.getvalue()
 
 def doc07():
-    doc07_path = Path.cwd() / "Templates" / "Declaratie-responsabil-conturi-bancare-v1.1.docx"
+    doc07_path = Path.cwd() / "Templates" / "07.Declaratie-responsabil-conturi-bancare-v1.1.docx"
     doc07_doc = DocxTemplate(doc07_path)
     context = var_dictionary()
     doc07_doc.render(context)
@@ -504,7 +488,7 @@ def doc07():
     return doc07_bytes.getvalue()
 
 def doc08():
-    doc08_path = Path.cwd() / "Templates" / "Declaratie-gestionar-sfarsit-inv-v1.1.docx"
+    doc08_path = Path.cwd() / "Templates" / "08.Proces-verbal-inventariere-numerar-si-conturi-banci-v1.1.docx"
     doc08_doc = DocxTemplate(doc08_path)
     context = var_dictionary()
     doc08_doc.render(context)
@@ -513,7 +497,7 @@ def doc08():
     return doc08_bytes.getvalue()
 
 def doc09():
-    doc09_path = Path.cwd() / "Templates" / "Proces-verbal-inventariere-v1.1.docx"
+    doc09_path = Path.cwd() / "Templates" / "09.Proces-verbal-inventariere-v1.1.docx"
     doc09_doc = DocxTemplate(doc09_path)
     context = var_dictionary()
     doc09_doc.render(context)
@@ -543,11 +527,11 @@ def create_zip_archive():
             zipf.writestr(f"{companie}-Decizie-inventariere-{data_decz}.docx",doc01_content)
             zipf.writestr(f"{companie}-Grafic-de-desfasurare-inventariere-{data_decz}.docx",doc02_content)
             zipf.writestr(f"{companie}-Proceduri-privind-inventarierea-{data_decz}.docx",doc03_content)
-            zipf.writestr(f"{companie}-Declaratie-gestionar-inainte-inv-{data_inv}.docx",doc04_content)
-            zipf.writestr(f"{companie}-PV-inventariere-numerar-si-conturi-banci-{data_inv}.docx",doc05_content)
-            zipf.writestr(f"{companie}-Declaratie-casier-{data_inv}.docx",doc06_content)
+            zipf.writestr(f"{companie}-Declaratie-casier-{data_inv}.docx",doc04_content)
+            zipf.writestr(f"{companie}-Declaratie-gestionar-inainte-inv-{data_inv}.docx",doc05_content)
+            zipf.writestr(f"{companie}-Declaratie-gestionar-sfarsit-inv-{data_inv}.docx",doc06_content)
             zipf.writestr(f"{companie}-Declaratie-responsabil-conturi-bancare-{data_inv}.docx",doc07_content)
-            zipf.writestr(f"{companie}-Declaratie-gestionar-sfarsit-inv-{data_inv}.docx",doc08_content)
+            zipf.writestr(f"{companie}-Proces-verbal-inventariere-numerar-si-conturi-banci-{data_inv}.docx",doc08_content)
             zipf.writestr(f"{companie}-Proces-verbal-inventariere-{data_inv}.docx",doc09_content)
         # Get the zip archive content as bytes
         zip_bytes = zip_buffer.getvalue()
@@ -577,7 +561,11 @@ with st.form("inventar", clear_on_submit=False):
         adr_sed = col1.text_input('Adresa Sediu', value="", key='adr_sed',
                                 placeholder='e.g. Oraș Brașov, Bd-ul Muncii, nr. 11, bl. A, sc. 1, et. 1, ap. 13, Birou 10',
                                 max_chars=None, help='')
-        jud_sed = col2.text_input('Județ', key='jud_sed', placeholder='e.g. BRAȘOV')
+        jud_sed = col2.text_input('Județ sediu', key='jud_sed', placeholder='e.g. BRAȘOV')
+        adr_pl1 = col1.text_input('Adresa punct de lucru', value="", key='adr_pl1',
+                        placeholder='e.g. Oraș Ploiești, Str. Găgeni, nr. 13',
+                        max_chars=None, help='')
+        jud_pl1 = col2.text_input('Județ punct de lucru', key='jud_pl1', placeholder='e.g. PRAHOVA')
         col1, col2, col3 = st.columns(3, gap="small")
         administrator = col1.text_input('Administrator', key='administrator', placeholder='e.g. POPESCU ANDREI')
         membru1_com = col2.text_input('Membru Comisie', key='membru1_com', placeholder='e.g. POPESCU ȘTEFAN')
@@ -759,7 +747,7 @@ with st.form("inventar", clear_on_submit=False):
         # cont10_ap = col2.text_input('Cont', key='cont10_ap', placeholder='....', label_visibility="collapsed")
         # den_cont10_ap = col3.text_input('Denumire cont', key='den_cont10_ap', placeholder='.....', label_visibility="collapsed")
         # val10_ap = col4.text_input('Valoare', key='val10_ap', placeholder='Valoare', label_visibility="collapsed")
-        propuneri_pvi = st.text_area('Propuneri:', key=None,
+        propuneri_pvi = st.text_area('Propuneri:', key='propuneri_pvi',
                                     help='În urma celor constatate, facem următoarele propuneri:',
                                     placeholder='1. Lorem ipsum odor amet, consectetuer adipiscing elit.\n2. Risus himenaeos potenti mollis; augue facilisi suscipit cras.\n3. Facilisi, dictumst vivamus, semper nibh inceptos.',
                                     disabled=False, label_visibility="visible")
@@ -797,15 +785,9 @@ if submitted:
             'companie': companie,
             'nr_inreg': nr_inreg,
             'adr_sed': adr_sed,
-            #'loc_sed': loc_sed,
-            #'str_sed': str_sed,
-            #'nr_sed': nr_sed,
-            #'bl_sed': bl_sed,
-            #'sc_sed': sc_sed,
-            #'et_sed': et_sed,
-            #'ap_sed': ap_sed,
-            #'cam_sed': cam_sed,
             'jud_sed': jud_sed,
+            'adr_pl1': adr_pl1,
+            'jud_pl1': jud_pl1,
             'administrator': administrator
         }
 
