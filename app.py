@@ -21,7 +21,7 @@ st.set_page_config(
     page_title='Inventariere', 
     layout='wide',
 )
-st.title('Întocmire acte pentru inventariere anuală:')
+st.title('Întocmire acte pentru inventariere:')
 
 ##--- HIDE STREAMLIT STYLE ---
 #hide_st_style = """
@@ -540,15 +540,15 @@ def create_zip_archive():
     with io.BytesIO() as zip_buffer:
         with ZipFile(zip_buffer, 'w') as zipf:
             # Add each doc to the archive
-            zipf.writestr(f"{companie}-Decizie-inventariere.docx",doc01_content)
-            zipf.writestr(f"{companie}-Grafic-de-desfasurare-inventariere.docx",doc02_content)
-            zipf.writestr(f"{companie}-Proceduri-privind-inventarierea.docx",doc03_content)
-            zipf.writestr(f"{companie}-Declaratie-gestionar-inainte-inv.docx",doc04_content)
-            zipf.writestr(f"{companie}-PV-inventariere-numerar-si-conturi-banci.docx",doc05_content)
-            zipf.writestr(f"{companie}-Declaratie-casier.docx",doc06_content)
-            zipf.writestr(f"{companie}-Declaratie-responsabil-conturi-bancare.docx",doc07_content)
-            zipf.writestr(f"{companie}-Declaratie-gestionar-sfarsit-inv.docx",doc08_content)
-            zipf.writestr(f"{companie}-Proces-verbal-inventariere.docx",doc09_content)
+            zipf.writestr(f"{companie}-Decizie-inventariere-{data_decz}.docx",doc01_content)
+            zipf.writestr(f"{companie}-Grafic-de-desfasurare-inventariere-{data_decz}.docx",doc02_content)
+            zipf.writestr(f"{companie}-Proceduri-privind-inventarierea-{data_decz}.docx",doc03_content)
+            zipf.writestr(f"{companie}-Declaratie-gestionar-inainte-inv-{data_inv}.docx",doc04_content)
+            zipf.writestr(f"{companie}-PV-inventariere-numerar-si-conturi-banci-{data_inv}.docx",doc05_content)
+            zipf.writestr(f"{companie}-Declaratie-casier-{data_inv}.docx",doc06_content)
+            zipf.writestr(f"{companie}-Declaratie-responsabil-conturi-bancare-{data_inv}.docx",doc07_content)
+            zipf.writestr(f"{companie}-Declaratie-gestionar-sfarsit-inv-{data_inv}.docx",doc08_content)
+            zipf.writestr(f"{companie}-Proces-verbal-inventariere-{data_inv}.docx",doc09_content)
         # Get the zip archive content as bytes
         zip_bytes = zip_buffer.getvalue()
     return zip_bytes
@@ -706,7 +706,7 @@ with st.form("inventar", clear_on_submit=False):
 
         st.divider()
 
-        st.write('Declaratie gestionar conturi bancare:')
+        st.write('Declarație responsabil conturi bancare:')
         col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172, ], gap="small")
         tip_doc_in_casier_cb = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal"), key='tip_doc_in_casier_cb', index=0, help=None)
         nr_doc_in_casier_cb = col2.text_input('Nr.', key='nr_doc_in_casier_cb', placeholder='xx')
