@@ -36,6 +36,7 @@ st.title('Întocmire acte pentru inventariere anuală:')
 
 
 DEFAULT_VALUES = {
+    "selected_company": "",
     "companie": "",
     "cui": "",
     "nr_inreg": "",
@@ -44,8 +45,125 @@ DEFAULT_VALUES = {
     "administrator": "",
     "nr_decz": "",
     "data_decz": "",
-    "selected_company": "",
-    }
+    "membru1_com": "",
+    "data_inv": "",
+    "data_predare_pv": "",
+    "an_inv": "",
+    "tip_inv": "",
+    "tip_doc_in_gest": "",
+    "nr_doc_in_gest": "",
+    "data_doc_in_gest": "",
+    "tip_doc_out_gest": "",
+    "nr_doc_out_gest": "",
+    "data_doc_out_gest": "",
+    
+    "tip_doc_in_casier": "",
+    "nr_doc_in_casier": "",
+    "data_doc_in_casier": "",
+    "tip_doc_out_casier": "",
+    "nr_doc_out_casier": "",
+    "data_doc_out_casier": "",
+    
+    "tip_doc_in_casier_cb": "",
+    "nr_doc_in_casier_cb": "",
+    "data_doc_in_casier_cb": "",
+    "data_incasare_doc_in_cb": "",
+    "tip_doc_out_casier_cb": "",
+    "nr_doc_out_casier_cb": "",
+    "data_doc_out_casier_cb": "",
+    "data_plata_doc_out_cb": "",
+    "furnizor_plata_out_cb": "",
+    
+    "ultima_zi_reg_casa": "",
+    "sold_casa_lei": "",
+
+    "lei500": "",
+    "lei200": "",
+    "lei100": "",
+    "lei50": "",
+    "lei20": "",
+    "lei10": "",
+    "lei5": "",
+    "leu1": "",
+    "bani50": "",
+    "bani10": "",
+    "bani5": "",
+    "ban1": "",
+
+    "totlei500": "",
+    "totlei200": "",
+    "totlei100": "",
+    "totlei50": "",
+    "totlei20": "",
+    "totlei10": "",
+    "totlei5": "",
+    "totleu1": "",
+    "totbani50": "",
+    "totbani10": "",
+    "totbani5": "",
+    "totban1": "",
+
+    "banca1lei": "",
+    "cont_banca1lei": "",
+    "sold_banca1lei": "",
+    "banca2lei": "",
+    "cont_banca2lei": "",
+    "sold_banca2lei": "",
+    "banca3lei": "",
+    "cont_banca3lei": "",
+    "sold_banca3lei": "",
+
+    "banca1euro": "",
+    "cont_banca1euro": "",
+    "sold_banca1euro": "",
+    "banca2euro": "",
+    "cont_banca2euro": "",
+    "sold_banca2euro": "",
+    "banca3euro": "",
+    "cont_banca3euro": "",
+    "sold_banca3euro": "",
+
+    "banca1usd": "",
+    "cont_banca1usd": "",
+    "sold_banca1usd": "",
+    "banca2usd": "",
+    "cont_banca2usd": "",
+    "sold_banca2usd": "",
+    "banca3usd": "",
+    "cont_banca3usd": "",
+    "sold_banca3usd": "",
+
+    "cont1_ap": "",
+    "den_cont1_ap": "",
+    "val1_ap": "",
+    "cont2_ap": "",
+    "den_cont2_ap": "",
+    "val2_ap": "",
+    "cont3_ap": "",
+    "den_cont3_ap": "",
+    "val3_ap": "",
+    "cont4_ap": "",
+    "den_cont4_ap": "",
+    "val4_ap": "",
+    "cont5_ap": "",
+    "den_cont5_ap": "",
+    "val5_ap": "",
+    "cont6_ap": "",
+    "den_cont6_ap": "",
+    "val6_ap": "",
+    "cont7_ap": "",
+    "den_cont7_ap": "",
+    "val7_ap": "",
+    "cont8_ap": "",
+    "den_cont8_ap": "",
+    "val8_ap": "",
+    "cont9_ap": "",
+    "den_cont9_ap": "",
+    "val9_ap": "",
+    "cont10_ap": "",
+    "den_cont10_ap": "",
+    "val10_ap": "",
+}
 
 def reset_all_fields():
     # Reset individual fields to default values
@@ -84,6 +202,7 @@ def var_dictionary ():
         'nr_decz' : nr_decz,
         'data_decz' : data_decz,
         'administrator' : administrator,
+        'membru1_com': membru1_com,
         'data_inv' : data_inv,
         'data_predare_pv' : data_predare_pv,
         'an_inv' : an_inv,
@@ -331,7 +450,7 @@ def doc01():
     return doc01_bytes.getvalue()
 
 def doc02():
-    doc02_path = Path.cwd() / "Templates" / "Grafic-de-desfasurare-inventariere-v1.0.docx"
+    doc02_path = Path.cwd() / "Templates" / "Grafic-de-desfasurare-inventariere-v1.1.docx"
     doc02_doc = DocxTemplate(doc02_path)
     context = var_dictionary()
     doc02_doc.render(context)
@@ -340,7 +459,7 @@ def doc02():
     return doc02_bytes.getvalue()
 
 def doc03():
-    doc03_path = Path.cwd() / "Templates" / "Proceduri-privind-inventarierea-v1.0.docx"
+    doc03_path = Path.cwd() / "Templates" / "Proceduri-privind-inventarierea-v1.1.docx"
     doc03_doc = DocxTemplate(doc03_path)
     context = var_dictionary()
     doc03_doc.render(context)
@@ -358,7 +477,7 @@ def doc04():
     return doc04_bytes.getvalue()
 
 def doc05():
-    doc05_path = Path.cwd() / "Templates" / "PV-inventariere-numerar-si-conturi-banci-v1.0.docx"
+    doc05_path = Path.cwd() / "Templates" / "PV-inventariere-numerar-si-conturi-banci-v1.1.docx"
     doc05_doc = DocxTemplate(doc05_path)
     context = var_dictionary()
     doc05_doc.render(context)
@@ -367,7 +486,7 @@ def doc05():
     return doc05_bytes.getvalue()
 
 def doc06():
-    doc06_path = Path.cwd() / "Templates" / "Declaratie-casier-v1.0.docx"
+    doc06_path = Path.cwd() / "Templates" / "Declaratie-casier-v1.1.docx"
     doc06_doc = DocxTemplate(doc06_path)
     context = var_dictionary()
     doc06_doc.render(context)
@@ -376,7 +495,7 @@ def doc06():
     return doc06_bytes.getvalue()
 
 def doc07():
-    doc07_path = Path.cwd() / "Templates" / "Declaratie-responsabil-conturi-bancare-v1.0.docx"
+    doc07_path = Path.cwd() / "Templates" / "Declaratie-responsabil-conturi-bancare-v1.1.docx"
     doc07_doc = DocxTemplate(doc07_path)
     context = var_dictionary()
     doc07_doc.render(context)
@@ -385,7 +504,7 @@ def doc07():
     return doc07_bytes.getvalue()
 
 def doc08():
-    doc08_path = Path.cwd() / "Templates" / "Declaratie-gestionar-sfarsit-inv-v1.0.docx"
+    doc08_path = Path.cwd() / "Templates" / "Declaratie-gestionar-sfarsit-inv-v1.1.docx"
     doc08_doc = DocxTemplate(doc08_path)
     context = var_dictionary()
     doc08_doc.render(context)
@@ -394,7 +513,7 @@ def doc08():
     return doc08_bytes.getvalue()
 
 def doc09():
-    doc09_path = Path.cwd() / "Templates" / "Proces-verbal-inventariere-v1.0.docx"
+    doc09_path = Path.cwd() / "Templates" / "Proces-verbal-inventariere-v1.1.docx"
     doc09_doc = DocxTemplate(doc09_path)
     context = var_dictionary()
     doc09_doc.render(context)
@@ -461,7 +580,7 @@ with st.form("inventar", clear_on_submit=False):
         jud_sed = col2.text_input('Județ', key='jud_sed', placeholder='e.g. BRAȘOV')
         col1, col2, col3 = st.columns(3, gap="small")
         administrator = col1.text_input('Administrator', key='administrator', placeholder='e.g. POPESCU ANDREI')
-        membru_com = col2.text_input('Membru Comisie', key='membru_com', placeholder='e.g. POPESCU ȘTEFAN')
+        membru1_com = col2.text_input('Membru Comisie', key='membru1_com', placeholder='e.g. POPESCU ȘTEFAN')
 
         #col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([0.25, 0.25, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08], gap="small")
         #loc_sed = col1.text_input('Localitate sediu', key='loc_sed', placeholder='e.g. BRAȘOV')
