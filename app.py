@@ -34,7 +34,6 @@ st.title('Întocmire acte pentru inventariere:')
 #st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
-
 DEFAULT_VALUES = {
     "selected_company": "",
     "companie": "",
@@ -612,15 +611,65 @@ with st.form("inventar", clear_on_submit=False):
         st.divider()
 
         st.write('Declaratie casier:')
-        col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172, ], gap="small")
-        tip_doc_in_casier = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal", "Dispozițe de încasare"), key='tip_doc_in_casier', index=0, help=None)
-        nr_doc_in_casier = col2.text_input('Nr.', key='nr_doc_in_casier', placeholder='xx')
-        data_doc_in_casier_tmp = col3.date_input('Data document', datetime.date.today(), key='data_doc_in_casier_tmp', help=None, format="DD.MM.YYYY")
+        
+        cols = st.columns([0.89, 2])
+    
+        with cols[0]:
+            opt_decl_casier = st.selectbox(
+                "Please select an option",
+                ("There were cash operations", "There were NO cash operations"),    
+                index=None, 
+                placeholder="Select an option",
+                key="opt_decl_casier",
+                help=None
+            )
+        st.write('')
+
+        col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(
+            [0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172], 
+            gap="small"
+            )
+        tip_doc_in_casier = col1.selectbox(
+                    'Tip document intrare',
+                    ("Factura", "Bon fiscal", "Dispozițe de încasare"),
+                    key='tip_doc_in_casier',
+                    index=0,
+                    help=None
+                )
+        nr_doc_in_casier = col2.text_input(
+            'Nr.',
+            key='nr_doc_in_casier',
+            placeholder='xx'
+        )
+        data_doc_in_casier_tmp = col3.date_input(
+            'Data document',
+            datetime.date.today(),
+            key='data_doc_in_casier_tmp',
+            help=None,
+            format="DD.MM.YYYY"
+        )
         data_doc_in_casier = data_doc_in_casier_tmp.strftime("%d.%m.%Y")
-        tip_doc_out_casier = col6.selectbox('Tip document ieșire', ("Factura", "Bon fiscal", "Dispoziție de plată", "Chitanță"), key='tip_doc_out_casier', index=0, help=None)
-        nr_doc_out_casier = col7.text_input('Nr.', key='nr_doc_out_casier', placeholder='xx')
-        data_doc_out_casier_tmp = col8.date_input('Data document', datetime.date.today(), key='data_doc_out_casier_tmp', help=None, format="DD.MM.YYYY")
+        tip_doc_out_casier = col6.selectbox(
+            'Tip document ieșire',
+            ("Factura", "Bon fiscal", "Dispoziție de plată", "Chitanță"),
+            key='tip_doc_out_casier',
+            index=0,
+            help=None
+        )
+        nr_doc_out_casier = col7.text_input(
+            'Nr.',
+            key='nr_doc_out_casier',
+            placeholder='xx'
+        )
+        data_doc_out_casier_tmp = col8.date_input(
+            'Data document',
+            datetime.date.today(),
+            key='data_doc_out_casier_tmp',
+            help=None,
+            format="DD.MM.YYYY"
+        )
         data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
+
 
         st.divider()
 
@@ -766,6 +815,15 @@ with st.form("inventar", clear_on_submit=False):
 # Handle form submission
 if submitted:
     with st.spinner("Generating documents..."):
+
+        # Handle the cash operations state changes here
+        if st.session_state.opt_decl_casier == "There were NO cash operations":
+            st.session_state.tip_doc_in_casier = None
+            st.session_state.nr_doc_in_casier = None
+            st.session_state.data_doc_in_casier = None
+            st.session_state.tip_doc_out_casier = None
+            st.session_state.nr_doc_out_casier = None
+            st.session_state.data_doc_out_casier = None
 
         # Calculate totals and format currency
         totlei500 = 500 * lei500
