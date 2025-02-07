@@ -50,6 +50,8 @@ DEFAULT_VALUES = {
     "data_inv": "",
     "data_predare_pv": "",
     "an_inv": "",
+
+    "optiuni_decl_gestionar": "S-au realizat operațiuni cu terți.",
     "tip_doc_in_gest": "",
     "nr_doc_in_gest": "",
     "data_doc_in_gest": "",
@@ -57,6 +59,7 @@ DEFAULT_VALUES = {
     "nr_doc_out_gest": "",
     "data_doc_out_gest": "",
     
+    "optiuni_decl_casier": "S-au realizat operațiuni cu numerar.",
     "tip_doc_in_casier": "",
     "nr_doc_in_casier": "",
     "data_doc_in_casier": "",
