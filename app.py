@@ -659,6 +659,7 @@ with st.form("inventar", clear_on_submit=False):
             format="DD.MM.YYYY"
         )
         data_doc_in_casier = data_doc_in_casier_tmp.strftime("%d.%m.%Y")
+
         tip_doc_out_casier = col6.selectbox(
             'Tip document ieșire',
             ("Factura", "Bon fiscal", "Dispoziție de plată", "Chitanță"),
@@ -666,11 +667,13 @@ with st.form("inventar", clear_on_submit=False):
             index=0,
             help=None
         )
+
         nr_doc_out_casier = col7.text_input(
             'Nr.',
             key='nr_doc_out_casier',
             placeholder='xx'
         )
+
         data_doc_out_casier_tmp = col8.date_input(
             'Data document',
             datetime.date.today(),
@@ -678,6 +681,7 @@ with st.form("inventar", clear_on_submit=False):
             help=None,
             format="DD.MM.YYYY"
         )
+        
         data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
 
         if optiuni_decl_casier == "NU s-au realizat operațiuni cu numerar.":
@@ -854,46 +858,58 @@ with st.form("inventar", clear_on_submit=False):
 
 # Handle form submission
 if submitted:
-    with st.spinner("Generating documents..."):
+    validation_errors = []
+    
+    if not st.session_state.get('optiuni_decl_casier'):
+        validation_errors.append("Vă rugăm să selectați o opțiune pentru operațiunile cu numerar.")
+    
+    if not st.session_state.get('optiuni_decl_gestionar'):
+        validation_errors.append("Vă rugăm să selectați o opțiune pentru operațiunile cu terți.")
+    
+    if validation_errors:
+        for error in validation_errors:
+            st.error(error)
+    else:
+        with st.spinner("Generating documents..."):
 
-        # Calculate totals and format currency
-        totlei500 = 500 * lei500
-        totlei200 = 200 * lei200
-        totlei100 = 100 * lei100
-        totlei50 = 50 * lei50
-        totlei20 = 20 * lei20
-        totlei10 = 10 * lei10 
-        totlei5  = 5 * lei5
-        totleu1  = 1 * leu1
-        totbani50 = 0.5 * bani50
-        totbani10 = 0.1 * bani10
-        totbani5 = 0.05 * bani5
-        totban1  = 0.01 * ban1
+            # Calculate totals and format currency
+            totlei500 = 500 * lei500
+            totlei200 = 200 * lei200
+            totlei100 = 100 * lei100
+            totlei50 = 50 * lei50
+            totlei20 = 20 * lei20
+            totlei10 = 10 * lei10 
+            totlei5  = 5 * lei5
+            totleu1  = 1 * leu1
+            totbani50 = 0.5 * bani50
+            totbani10 = 0.1 * bani10
+            totbani5 = 0.05 * bani5
+            totban1  = 0.01 * ban1
 
-        sold_casa_lei_tmp = totlei500 + totlei200 + totlei100 + totlei50 + totlei20 + totlei10 + totlei5 + totlei10 + totlei5 + totleu1 + totbani50 + totbani10 + totbani5 + totban1
-        sold_casa_lei = locale._format("%.2f", sold_casa_lei_tmp, True)
+            sold_casa_lei_tmp = totlei500 + totlei200 + totlei100 + totlei50 + totlei20 + totlei10 + totlei5 + totlei10 + totlei5 + totleu1 + totbani50 + totbani10 + totbani5 + totban1
+            sold_casa_lei = locale._format("%.2f", sold_casa_lei_tmp, True)
 
-            # Create dictionary with company data for database storage
-        data_to_save = {
-            'cui': cui,
-            'companie': companie,
-            'nr_inreg': nr_inreg,
-            'adr_sed': adr_sed,
-            'jud_sed': jud_sed,
-            'adr_pl1': adr_pl1,
-            'jud_pl1': jud_pl1,
-            'administrator': administrator
-        }
+                # Create dictionary with company data for database storage
+            data_to_save = {
+                'cui': cui,
+                'companie': companie,
+                'nr_inreg': nr_inreg,
+                'adr_sed': adr_sed,
+                'jud_sed': jud_sed,
+                'adr_pl1': adr_pl1,
+                'jud_pl1': jud_pl1,
+                'administrator': administrator
+            }
 
-        # Save company data in background thread
-        threading.Thread(target=save_or_update_company, args=(data_to_save,)).start()
+            # Save company data in background thread
+            threading.Thread(target=save_or_update_company, args=(data_to_save,)).start()
 
-        # Generate documents
-        zip_archive = create_zip_archive()
+            # Generate documents
+            zip_archive = create_zip_archive()
 
-    # Show success message and download button
-    st.success("Succes! The documents have been generated.")
-    st.download_button(label="Step 2: Download", 
-                    data=zip_archive, file_name=f"{companie}-acte-inventariere-{datetime.date.today()}.zip",
-                    mime="docx", type="primary"
-                    )
+            # Show success message and download button
+            st.success("Succes! The documents have been generated.")
+            st.download_button(label="Step 2: Download", 
+                            data=zip_archive, file_name=f"{companie}-acte-inventariere-{datetime.date.today()}.zip",
+                            mime="docx", type="primary"
+                            )
