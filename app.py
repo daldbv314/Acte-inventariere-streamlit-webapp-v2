@@ -626,7 +626,7 @@ with st.form("inventar", clear_on_submit=False):
             optiuni_decl_casier = st.selectbox(
                 "Va rugăm să selectați una dintre opțiuni",
                 ("S-au realizat operațiuni cu numerar.", "NU s-au realizat operațiuni cu numerar."),    
-                index=None, 
+                index=0, 
                 placeholder="Selectați o opțiune",
                 key="optiuni_decl_casier",
                 help=None
@@ -634,6 +634,10 @@ with st.form("inventar", clear_on_submit=False):
         st.write('')
         st.write('')
 
+        st.info(
+            'Dacă ați selectat "NU s-au realizat operațiuni cu numerar", nu este nevoie să completați aici:',
+            icon="ℹ️"
+        )
         
         col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(
             [0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172], 
@@ -681,7 +685,7 @@ with st.form("inventar", clear_on_submit=False):
             help=None,
             format="DD.MM.YYYY"
         )
-        
+
         data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
 
         if optiuni_decl_casier == "NU s-au realizat operațiuni cu numerar.":
@@ -702,13 +706,18 @@ with st.form("inventar", clear_on_submit=False):
             optiuni_decl_gestionar = st.selectbox(
                 "Va rugăm să selectați una dintre opțiuni",
                 ("S-au realizat operațiuni cu terți.", "NU s-au realizat operațiuni cu terți."),    
-                index=None, 
+                index=0, 
                 placeholder="Selectați o opțiune",
                 key="optiuni_decl_gestionar",
                 help=None
             )
         st.write('')
         st.write('')
+
+        st.markdown(
+        '<p style="color: #FF7F7F;">Dacă ați selectat "NU s-au realizat operațiuni cu terți", nu este nevoie să completați aici:</p>',
+        unsafe_allow_html=True
+        )
         
         col1, col2, col3, col4, col5, col6, col7 = st.columns([0.15, 0.15, 0.15, 0.1, 0.15, 0.15, 0.15], gap="small")
         tip_doc_in_gest = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal"), key='tip_doc_in_gest', index=0, help=None)
