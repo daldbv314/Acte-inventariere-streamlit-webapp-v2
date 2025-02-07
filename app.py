@@ -187,6 +187,11 @@ if buton_sterg:
 # This extensive dictionary maps all template variables to their corresponding values
 # Used by DocxTemplate for document generation
 def var_dictionary ():
+
+    # Add this new variable to control the conditional logic in the template
+    operatiuni_cash = st.session_state.get('optiuni_decl_casier') == "S-au realizat operațiuni cu numerar."
+    operatiuni_terti = st.session_state.get('optiuni_decl_casier') == "S-au realizat operațiuni cu numerar."
+
     var_dict = {
         'companie' : companie,
         'cui' : cui,
@@ -202,19 +207,22 @@ def var_dictionary ():
         'data_inv' : data_inv,
         'data_predare_pv' : data_predare_pv,
         'an_inv' : an_inv,
-        'tip_doc_in_gest' : tip_doc_in_gest,
-        'nr_doc_in_gest' : nr_doc_in_gest,
-        'data_doc_in_gest' : data_doc_in_gest,
-        'tip_doc_out_gest' : tip_doc_out_gest,
-        'nr_doc_out_gest' : nr_doc_out_gest,
-        'data_doc_out_gest' : data_doc_out_gest,
 
+        'operatiuni_cash': operatiuni_cash,
         'tip_doc_in_casier' : tip_doc_in_casier,
         'nr_doc_in_casier' : nr_doc_in_casier,
         'data_doc_in_casier' : data_doc_in_casier,
         'tip_doc_out_casier' : tip_doc_out_casier,
         'nr_doc_out_casier' : nr_doc_out_casier,
         'data_doc_out_casier' : data_doc_out_casier,
+
+        'operatiuni_terti' : operatiuni_terti,
+        'tip_doc_in_gest' : tip_doc_in_gest,
+        'nr_doc_in_gest' : nr_doc_in_gest,
+        'data_doc_in_gest' : data_doc_in_gest,
+        'tip_doc_out_gest' : tip_doc_out_gest,
+        'nr_doc_out_gest' : nr_doc_out_gest,
+        'data_doc_out_gest' : data_doc_out_gest,
 
         'tip_doc_in_casier_cb' : tip_doc_in_casier_cb,
         'nr_doc_in_casier_cb' : nr_doc_in_casier_cb,
@@ -626,6 +634,7 @@ with st.form("inventar", clear_on_submit=False):
         st.write('')
         st.write('')
 
+        
         col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(
             [0.11, 0.10, 0.10, 0.10, 0.028, 0.10, 0.10, 0.10, 0.10, 0.172], 
             gap="small"
@@ -671,7 +680,17 @@ with st.form("inventar", clear_on_submit=False):
         )
         data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
 
+        if optiuni_decl_casier == "NU s-au realizat operațiuni cu numerar.":
+            tip_doc_in_casier = ''
+            nr_doc_in_casier = ''
+            data_doc_in_casier = ''
+            tip_doc_out_casier = ''
+            nr_doc_out_casier = ''
+            data_doc_out_casier = ''
+
         st.divider()
+
+        st.write('Declaratie gestionar:')
 
         cols = st.columns([0.89, 2])
     
@@ -686,8 +705,7 @@ with st.form("inventar", clear_on_submit=False):
             )
         st.write('')
         st.write('')
-
-        st.write('Declaratie gestionar:')
+        
         col1, col2, col3, col4, col5, col6, col7 = st.columns([0.15, 0.15, 0.15, 0.1, 0.15, 0.15, 0.15], gap="small")
         tip_doc_in_gest = col1.selectbox('Tip document intrare', ("Factura", "Bon fiscal"), key='tip_doc_in_gest', index=0, help=None)
         nr_doc_in_gest = col2.text_input('Nr.', key='nr_doc_in_gest', placeholder='xx')
@@ -697,6 +715,14 @@ with st.form("inventar", clear_on_submit=False):
         nr_doc_out_gest =  col6.text_input('Nr.', key='nr_doc_out_gest', placeholder='xx')
         data_doc_out_gest_tmp = col7.date_input('Data document', datetime.date.today(), key='data_doc_out_gest_tmp', help=None, format="DD.MM.YYYY")
         data_doc_out_gest = data_doc_out_gest_tmp.strftime("%d.%m.%Y")
+
+        if optiuni_decl_gestionar == "NU s-au realizat operațiuni cu terți.":
+            tip_doc_in_gest = ''
+            nr_doc_in_gest = ''
+            data_doc_in_gest = ''
+            tip_doc_out_gest = ''
+            nr_doc_out_gest = ''
+            data_doc_out_gest = ''
         
         st.divider()
 
@@ -829,15 +855,6 @@ with st.form("inventar", clear_on_submit=False):
 # Handle form submission
 if submitted:
     with st.spinner("Generating documents..."):
-
-        # Handle the cash operations state changes here
-        if st.session_state.opt_decl_casier == "There were NO cash operations":
-            st.session_state.tip_doc_in_casier = None
-            st.session_state.nr_doc_in_casier = None
-            st.session_state.data_doc_in_casier = None
-            st.session_state.tip_doc_out_casier = None
-            st.session_state.nr_doc_out_casier = None
-            st.session_state.data_doc_out_casier = None
 
         # Calculate totals and format currency
         totlei500 = 500 * lei500
