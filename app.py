@@ -615,14 +615,15 @@ with st.form("inventar", clear_on_submit=False):
         cols = st.columns([0.89, 2])
     
         with cols[0]:
-            opt_decl_casier = st.selectbox(
-                "Please select an option",
-                ("There were cash operations", "There were NO cash operations"),    
+            optiuni_decl_casier = st.selectbox(
+                "Va rugăm să selectați una dintre opțiuni",
+                ("S-au realizat operațiuni cu numerar.", "NU s-au realizat operațiuni cu numerar."),    
                 index=None, 
-                placeholder="Select an option",
-                key="opt_decl_casier",
+                placeholder="Selectați o opțiune",
+                key="optiuni_decl_casier",
                 help=None
             )
+        st.write('')
         st.write('')
 
         col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(
@@ -670,8 +671,21 @@ with st.form("inventar", clear_on_submit=False):
         )
         data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
 
-
         st.divider()
+
+        cols = st.columns([0.89, 2])
+    
+        with cols[0]:
+            optiuni_decl_gestionar = st.selectbox(
+                "Va rugăm să selectați una dintre opțiuni",
+                ("S-au realizat operațiuni cu terți.", "NU s-au realizat operațiuni cu terți."),    
+                index=None, 
+                placeholder="Selectați o opțiune",
+                key="optiuni_decl_gestionar",
+                help=None
+            )
+        st.write('')
+        st.write('')
 
         st.write('Declaratie gestionar:')
         col1, col2, col3, col4, col5, col6, col7 = st.columns([0.15, 0.15, 0.15, 0.1, 0.15, 0.15, 0.15], gap="small")
