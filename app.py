@@ -634,9 +634,9 @@ with st.form("inventar", clear_on_submit=False):
         st.write('')
         st.write('')
 
-        st.info(
-            'Dacă ați selectat "NU s-au realizat operațiuni cu numerar", nu este nevoie să completați aici:',
-            icon="ℹ️"
+        st.markdown(
+        '<p style="color: #FF7F7F;">Dacă ați selectat "NU s-au realizat operațiuni cu numerar", nu este nevoie să completați aici:</p>',
+        unsafe_allow_html=True
         )
         
         col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(
