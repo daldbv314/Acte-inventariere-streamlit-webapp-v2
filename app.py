@@ -1,4 +1,5 @@
 import io
+import os
 import datetime
 import streamlit as st
 from zipfile import ZipFile
@@ -37,6 +38,30 @@ st.title('Întocmire acte pentru inventariere:')
 
 # This extensive dictionary maps all template variables to their corresponding values
 # Used by DocxTemplate for document generation
+
+
+# # Open the database file in binary mode
+# with open("company_data.db", "rb") as file:
+#     db_data = file.read()
+
+# # Create a download button that serves the file to the user
+# st.download_button(
+#     label="Download company_data.db",
+#     data=db_data,
+#     file_name="company_data.db",
+#     mime="application/octet-stream"  # You can also use "application/x-sqlite3" if desired
+# )
+
+# # Create a file uploader widget that only accepts .db files.
+# uploaded_file = st.file_uploader("Upload new company_data.db file", type=["db"])
+
+# if uploaded_file is not None:
+#     # Open the target file in binary write mode and write the contents of the uploaded file.
+#     with open("company_data.db", "wb") as f:
+#         f.write(uploaded_file.getbuffer())
+#     st.success("company_data.db file uploaded and replaced successfully!")
+
+
 def var_dictionary ():
 
     # Add this new variable to control the conditional logic in the template
