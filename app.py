@@ -551,6 +551,7 @@ with st.form("inventar", clear_on_submit=False):
         data_doc_out_casier = data_doc_out_casier_tmp.strftime("%d.%m.%Y")
 
         if optiuni_decl_casier == "NU s-au realizat operațiuni cu numerar.":
+            # Clear fields related to cash operations as they are not needed
             tip_doc_in_casier = ''
             nr_doc_in_casier = ''
             data_doc_in_casier = ''
@@ -592,6 +593,7 @@ with st.form("inventar", clear_on_submit=False):
         data_doc_out_gest = data_doc_out_gest_tmp.strftime("%d.%m.%Y")
 
         if optiuni_decl_gestionar == "NU s-au realizat operațiuni cu terți.":
+            # Clear fields related to cash operations as they are not needed
             tip_doc_in_gest = ''
             nr_doc_in_gest = ''
             data_doc_in_gest = ''
