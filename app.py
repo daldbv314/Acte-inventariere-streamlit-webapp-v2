@@ -1,11 +1,9 @@
-import os
 import io
 import datetime
 import streamlit as st
 from zipfile import ZipFile
 from pathlib import Path
 from docxtpl import DocxTemplate
-#from dotenv import load_dotenv
 from io import BytesIO
 import locale
 from sqlalchemy import create_engine, Column, String
@@ -43,7 +41,7 @@ def var_dictionary ():
 
     # Add this new variable to control the conditional logic in the template
     operatiuni_cash = st.session_state.get('optiuni_decl_casier') == "S-au realizat operațiuni cu numerar."
-    operatiuni_terti = st.session_state.get('optiuni_decl_casier') == "S-au realizat operațiuni cu numerar."
+    operatiuni_terti = st.session_state.get('optiuni_decl_gestionar') == "S-au realizat operațiuni cu terți."
 
     var_dict = {
         'companie' : companie,
@@ -181,7 +179,10 @@ def var_dictionary ():
     }
     return var_dict
 
+# --------------------------
 # Database Configuration
+# --------------------------
+
 DB_PATH = 'company_data.db'
 Base = declarative_base()
 
@@ -212,8 +213,15 @@ class Company(Base):
 # Create database tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
+# --------------------------
+# Database Utility Functions
+# --------------------------
+
 # Function to load data based on company name
 def load_company_data_by_name(company_name):
+    """
+    Loads a single company record by its name.
+    """
     session = SessionLocal()
     company = session.query(Company).filter(Company.companie == company_name).first()
     session.close()
@@ -422,6 +430,7 @@ with st.form("inventar", clear_on_submit=False):
                                 placeholder='e.g. Oraș Brașov, Bd-ul Muncii, nr. 11, bl. A, sc. 1, et. 1, ap. 13, Birou 10',
                                 max_chars=None, help='')
         jud_sed = col2.text_input('Județ sediu', key='jud_sed', placeholder='e.g. BRAȘOV')
+        col1, col2, col3 = st.columns(3, gap="small")
         adr_pl1 = col1.text_input('Adresa punct de lucru', value="", key='adr_pl1',
                         placeholder='e.g. Oraș Ploiești, Str. Găgeni, nr. 13',
                         max_chars=None, help='')
@@ -748,7 +757,7 @@ if submitted:
             totbani5 = 0.05 * bani5
             totban1  = 0.01 * ban1
 
-            sold_casa_lei_tmp = totlei500 + totlei200 + totlei100 + totlei50 + totlei20 + totlei10 + totlei5 + totlei10 + totlei5 + totleu1 + totbani50 + totbani10 + totbani5 + totban1
+            sold_casa_lei_tmp = totlei500 + totlei200 + totlei100 + totlei50 + totlei20 + totlei10 + totlei5 + totleu1 + totbani50 + totbani10 + totbani5 + totban1
             sold_casa_lei = locale._format("%.2f", sold_casa_lei_tmp, True)
 
                 # Create dictionary with company data for database storage
