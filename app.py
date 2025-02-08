@@ -33,7 +33,7 @@ st.title('Întocmire acte pentru inventariere:')
 #            """
 #st.markdown(hide_st_style, unsafe_allow_html=True)
 
-
+    
 DEFAULT_VALUES = {
     "selected_company": "",
     "companie": "",
@@ -44,97 +44,97 @@ DEFAULT_VALUES = {
     "adr_pl1": "",
     "jud_pl1": "",
     "administrator": "",
-    "nr_decz": "",
-    "data_decz": "",
+    "nr_decz_tmp": "",
+    "data_decz": datetime.date.today(),
     "membru1_com": "",
-    "data_inv": "",
-    "data_predare_pv": "",
-    "an_inv": "",
+    "data_inv_tmp": datetime.date.today(),
+    "data_predare_pv_tmp": "",
+    "an_inv": datetime.date.today().year,
 
     "optiuni_decl_gestionar": "S-au realizat operațiuni cu terți.",
-    "tip_doc_in_gest": "",
+    "tip_doc_in_gest": "Factura",
     "nr_doc_in_gest": "",
-    "data_doc_in_gest": "",
-    "tip_doc_out_gest": "",
+    "data_doc_in_gest_tmp": datetime.date.today(),
+    "tip_doc_out_gest": "Factura",
     "nr_doc_out_gest": "",
-    "data_doc_out_gest": "",
+    "data_doc_out_gest_tmp": datetime.date.today(),
     
     "optiuni_decl_casier": "S-au realizat operațiuni cu numerar.",
-    "tip_doc_in_casier": "",
+    "tip_doc_in_casier": "Factura",
     "nr_doc_in_casier": "",
-    "data_doc_in_casier": "",
-    "tip_doc_out_casier": "",
+    "data_doc_in_casier_tmp": datetime.date.today(),
+    "tip_doc_out_casier": "Factura",
     "nr_doc_out_casier": "",
-    "data_doc_out_casier": "",
+    "data_doc_out_casier_tmp": datetime.date.today(),
     
-    "tip_doc_in_casier_cb": "",
+    "tip_doc_in_casier_cb": "Factura",
     "nr_doc_in_casier_cb": "",
-    "data_doc_in_casier_cb": "",
-    "data_incasare_doc_in_cb": "",
-    "tip_doc_out_casier_cb": "",
+    "data_doc_in_casier_cb_tmp": datetime.date.today(),
+    "data_incasare_doc_in_cb_tmp": datetime.date.today(),
+    "tip_doc_out_casier_cb": "Factura",
     "nr_doc_out_casier_cb": "",
-    "data_doc_out_casier_cb": "",
-    "data_plata_doc_out_cb": "",
+    "data_doc_out_casier_cb_tmp": datetime.date.today(),
+    "data_plata_doc_out_cb_tmp": datetime.date.today(),
     "furnizor_plata_out_cb": "",
     
-    "ultima_zi_reg_casa": "",
+    "ultima_zi_reg_casa_tmp": datetime.date.today(),
     "sold_casa_lei": "",
 
-    "lei500": "",
-    "lei200": "",
-    "lei100": "",
-    "lei50": "",
-    "lei20": "",
-    "lei10": "",
-    "lei5": "",
-    "leu1": "",
-    "bani50": "",
-    "bani10": "",
-    "bani5": "",
-    "ban1": "",
+    "lei500": 0,
+    "lei200": 0,
+    "lei100": 0,
+    "lei50": 0,
+    "lei20": 0,
+    "lei10": 0,
+    "lei5": 0,
+    "leu1": 0,
+    "bani50": 0,
+    "bani10": 0,
+    "bani5": 0,
+    "ban1": 0,
 
-    "totlei500": "",
-    "totlei200": "",
-    "totlei100": "",
-    "totlei50": "",
-    "totlei20": "",
-    "totlei10": "",
-    "totlei5": "",
-    "totleu1": "",
-    "totbani50": "",
-    "totbani10": "",
-    "totbani5": "",
-    "totban1": "",
+    "totlei500": 0,
+    "totlei200": 0,
+    "totlei100": 0,
+    "totlei50": 0,
+    "totlei20": 0,
+    "totlei10": 0,
+    "totlei5": 0,
+    "totleu1": 0,
+    "totbani50": 0,
+    "totbani10": 0,
+    "totbani5": 0,
+    "totban1": 0,
 
     "banca1lei": "",
     "cont_banca1lei": "",
-    "sold_banca1lei": "",
+    "sold_banca1lei": 0,
     "banca2lei": "",
     "cont_banca2lei": "",
-    "sold_banca2lei": "",
+    "sold_banca2lei": 0,
     "banca3lei": "",
     "cont_banca3lei": "",
-    "sold_banca3lei": "",
+    "sold_banca3lei": 0,
 
     "banca1euro": "",
     "cont_banca1euro": "",
-    "sold_banca1euro": "",
+    "sold_banca1euro": 0,
     "banca2euro": "",
     "cont_banca2euro": "",
-    "sold_banca2euro": "",
+    "sold_banca2euro": 0,
     "banca3euro": "",
     "cont_banca3euro": "",
-    "sold_banca3euro": "",
+    "sold_banca3euro": 0,
 
     "banca1usd": "",
     "cont_banca1usd": "",
-    "sold_banca1usd": "",
+    "sold_banca1usd": 0,
     "banca2usd": "",
     "cont_banca2usd": "",
-    "sold_banca2usd": "",
+    "sold_banca2usd": 0,
     "banca3usd": "",
     "cont_banca3usd": "",
-    "sold_banca3usd": "",
+    "sold_banca3usd": 0,
 
     # "cont1_ap": "",
     # "den_cont1_ap": "",
@@ -173,7 +173,8 @@ DEFAULT_VALUES = {
 def reset_all_fields():
     # Reset individual fields to default values
     for key, default in DEFAULT_VALUES.items():
-        st.session_state[key] = default
+        if key in st.session_state:
+            st.session_state[key] = default
     # No explicit rerun call here; the state update will trigger a re-run
 
 col1, col2 = st.columns([7, 1])
@@ -817,10 +818,10 @@ with st.form("inventar", clear_on_submit=False):
 
         st.divider()
 
-        st.markdown(
-                    """<hr style="border:2px solid grey;">""", 
-                    unsafe_allow_html=True
-                    )
+        # st.markdown(
+        #     """<hr style="border: 2px solid #586e75">""",
+        #     unsafe_allow_html=True
+        # )
 
         st.write('Proces verbal privind rezultatele inventarierii:')
         #col1, col2, col3, col4, col5 = st.columns([0.125, 0.125, 0.375, 0.125, 0.25], gap="small")
