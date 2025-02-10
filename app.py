@@ -234,6 +234,7 @@ class Company(Base):
 
     # Administrative contact
     administrator = Column(String, nullable=True)
+    membru1_com = Column(String, nullable=True)
 
 # Create database tables if they don't exist
 Base.metadata.create_all(bind=engine)
@@ -313,7 +314,8 @@ def company_selection_change():
                 'jud_sed': company.jud_sed or '',
                 'adr_pl1': company.adr_pl1 or '',
                 'jud_pl1': company.jud_pl1 or '',
-                'administrator': company.administrator or ''
+                'administrator': company.administrator or '',
+                'membru1_com': company.membru1_com or ''
             })
 
 # Document Generation Functions
@@ -417,15 +419,15 @@ def create_zip_archive():
     with io.BytesIO() as zip_buffer:
         with ZipFile(zip_buffer, 'w') as zipf:
             # Add each doc to the archive
-            zipf.writestr(f"{companie}-Decizie-inventariere-{data_decz}.docx",doc01_content)
-            zipf.writestr(f"{companie}-Grafic-de-desfasurare-inventariere-{data_decz}.docx",doc02_content)
-            zipf.writestr(f"{companie}-Proceduri-privind-inventarierea-{data_decz}.docx",doc03_content)
-            zipf.writestr(f"{companie}-Declaratie-casier-{data_inv}.docx",doc04_content)
-            zipf.writestr(f"{companie}-Declaratie-gestionar-inainte-inv-{data_inv}.docx",doc05_content)
-            zipf.writestr(f"{companie}-Declaratie-gestionar-sfarsit-inv-{data_inv}.docx",doc06_content)
-            zipf.writestr(f"{companie}-Declaratie-responsabil-conturi-bancare-{data_inv}.docx",doc07_content)
-            zipf.writestr(f"{companie}-Proces-verbal-inventariere-numerar-si-conturi-banci-{data_inv}.docx",doc08_content)
-            zipf.writestr(f"{companie}-Proces-verbal-inventariere-{data_inv}.docx",doc09_content)
+            zipf.writestr(f"{companie}-01.Decizie-inventariere-{data_decz}.docx",doc01_content)
+            zipf.writestr(f"{companie}-02.Grafic-de-desfasurare-inventariere-{data_decz}.docx",doc02_content)
+            zipf.writestr(f"{companie}-03.Proceduri-privind-inventarierea-{data_decz}.docx",doc03_content)
+            zipf.writestr(f"{companie}-04.Declaratie-casier-{data_inv}.docx",doc04_content)
+            zipf.writestr(f"{companie}-05.Declaratie-gestionar-inainte-inv-{data_inv}.docx",doc05_content)
+            zipf.writestr(f"{companie}-06.Declaratie-gestionar-sfarsit-inv-{data_inv}.docx",doc06_content)
+            zipf.writestr(f"{companie}-07.Declaratie-responsabil-conturi-bancare-{data_inv}.docx",doc07_content)
+            zipf.writestr(f"{companie}-08.Proces-verbal-inventariere-numerar-si-conturi-banci-{data_inv}.docx",doc08_content)
+            zipf.writestr(f"{companie}-09.Proces-verbal-inventariere-{data_inv}.docx",doc09_content)
         # Get the zip archive content as bytes
         zip_bytes = zip_buffer.getvalue()
     return zip_bytes
@@ -796,7 +798,8 @@ if submitted:
                 'jud_sed': jud_sed,
                 'adr_pl1': adr_pl1,
                 'jud_pl1': jud_pl1,
-                'administrator': administrator
+                'administrator': administrator,
+                'membru1_com': membru1_com
             }
 
             # Save company data in background thread
